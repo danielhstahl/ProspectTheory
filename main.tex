@@ -7,9 +7,7 @@
 \usepackage{graphicx}
 \usepackage{cite}
 \usepackage{float}
-\theoremstyle{definition}
-\newtheorem{theorem}{Theorem}
-
+\setlength{\parindent}{0cm}
 
 \begin{document}
 	
@@ -29,7 +27,7 @@ Over the decades since Neo-Classical economics was introduced, much of the initi
 The goal of this paper is threefold: to clarify certain aspects of Neo-Classical economics for the lay reader, to identify and explain the two competing frameworks for studying human behavior, and to introduce a framework for synthesizing the three frameworks.  
 
 \section{Neo-Classical Framework and Results}
-Neo-Classical economics posits that economic agents have utility functions \(U(x)\) that describe the utility, or benefit, from consuming \(x\).  Given the existence of these utility functions, a ``rationale'' actor will seek to maximize his or her utility.  From this seemingly simple framework, a wealth of results have been proved.  
+Neo-Classical economics posits that economic agents have utility functions \(U(x)\) that describe the utility, or benefit, from consuming \(x\).  Given the existence of these utility functions, a ``rational'' actor will seek to maximize his or her utility.  From this seemingly simple framework, a wealth of results have been proved.  
 \\
 \\
 First, if utility functions are convex, then the St. Petersburg paradox is resolved.  The St. Petersburg paradox results from a gamble with the following recipe:
@@ -89,6 +87,95 @@ As exemplified in the sections on Prospect Theory and Austrian Theory, Neo-Class
 \\
 \\
 As a solution for the observed non-linear preferences found experimentally, Kahneman and Tversky propose re-weighting the probabilities.  While never explicitly expressed in their papers, this solution is essentially a change of measure from a ``real-world'' probability to a ``preference-neutral'' probability.  In other words, the problem that an agent maximizes is not \(\mathbb{E}\left[U(x)\right]\) but rather \(\mathbb{E}_Q\left[U(x)\right]\) where \(\mathbb{E}_Q\) represents the probability under the ``subjective'' measure \(\mathbb{Q}\).  As an aside, the option pricing problem is another area of economics where changes of measure are used.  It is important to note that option pricing is firmly aligned with classic utility theory: the change of measure embeds the utility function within the updated measure.  In Prospect Theory, the measure change does not embed the utility function which still exists separately from the measure change.  
+
+\subsection{Allais Paradox}
+
+Allais in 1979 proposed the following two sets of choices of gambles:
+
+\subsubsection{Choice 1}
+
+\begin{equation*}
+\left\{
+\begin{array}{rl}
+1\text{M} & \text{with probability } 1
+\end{array} \right.
+\end{equation*}
+
+OR
+
+\begin{equation*}
+\left\{
+\begin{array}{rl}
+0 & \text{with probability } 0.01,
+\\1\text{M} & \text{with probability } 0.89,
+\\5\text{M} & \text{with probability } 0.1.
+\end{array} \right.
+\end{equation*}
+
+\subsubsection{Choice 2}
+
+\begin{equation*}
+\left\{
+\begin{array}{rl}
+\\0\text{M} & \text{with probability } 0.89,
+\\1\text{M} & \text{with probability } 0.11.
+\end{array} \right.
+\end{equation*}
+
+OR
+
+\begin{equation*}
+\left\{
+\begin{array}{rl}
+0 & \text{with probability } 0.9,
+\\5\text{M} & \text{with probability } 0.1.
+\end{array} \right.
+\end{equation*}
+
+The paradox is that if an agent were to prefer the second option for choice one, then the agent should prefer the second option for choice two.  Likewise, if the agent were to prefer the first option for choice one, the agent should prefer the first option for choice two.  However, many people would prefer the first option for choice 1 and the second option for choice 2.  Even the remote possibility of missing out on 1 million dollars is too big a gamble.  
+
+To illustrate, consider again a utility function \(U(x)=\ln(x)\) with initial wealth of \(\$100,000\) dollars.  Under the standard utility framework, the utilities are as follows:
+\begin{center} 
+\begin{tabular}{c|c c}
+	& Option 1 & Option 2 \\
+	\hline
+	Choice 1  & 0.095 & 0.225 \\
+	Choice 2  &  -1.909 & -0.471 
+\end{tabular}
+\end{center}
+As expected, in the standard utility theory setting, option 2 is preferable in both choices.  Now, assume the subjective probabilities for choice one are updated:
+
+\subsubsection{Choice 1 with Subjective Probabilities}
+
+\begin{equation*}
+\left\{
+\begin{array}{rl}
+1\text{M} & \text{with probability } 1
+\end{array} \right.
+\end{equation*}
+
+OR
+
+\begin{equation*}
+\left\{
+\begin{array}{rl}
+0 & \text{with probability } 0.07,
+\\1\text{M} & \text{with probability } 0.83,
+\\5\text{M} & \text{with probability } 0.1.
+\end{array} \right.
+\end{equation*}
+
+Now the utilities are as follows:
+\begin{center} 
+\begin{tabular}{c|c c}
+	& Option 1 & Option 2 \\
+	\hline
+	Choice 1  & 0.095 & .0809 \\
+	Choice 2  &  -1.909 & -0.471 
+\end{tabular}
+\end{center} 
+Option 1 is preferred for choice 1 while option 2 is again preferred for choice 2.  
+
 
 \subsection{Implication for Neo-Classic Theory}
 
