@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\usepackage{caption}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{float}
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+
+
+\begin{document}
+	
+	
+\title{Unified Framework of Rational Agents}
+\date{}
+\author{Daniel H. Stahl}
+
+\section{Introduction}
+
+Neo-Classical economics emphasizes individual preferences, typically represented by a utility function.  The study of Neo-Classical economics can be considered the conclusions that can be drawn from utility theory under various circumstances or conditions.  Due to the mathematical nature of utility functions, these studies naturally draw upon the language of mathematical theory.  Indeed, perhaps the most interesting of human behavior (whether economic or otherwise) is choice under uncertainty.  The mathematical model for uncertainty is ``probability''.  
+\\
+\\
+Over the decades since Neo-Classical economics was introduced, much of the initial mathematical results have roughly held, despite significant relaxation of the initial assumptions.  However, Neo-Classical economics is also continuously criticized both in the popular media and in various academic disciplines.  In psychology, Daniel Kahneman and Amos Tversky have introduced alternative representations of choice under uncertainty.  Kahneman received the 2002 Nobel prize in economics for his work.  Kahneman and Tversky openly question expected utility in their papers (Kahneman and Tversky 1992).  In economics, Friedrich Hayek criticized Neo-Classical economics for de-emphasizing idiosyncratic knowledge that each economic agent has, and how that knowledge leads to ``planning'' and ``actions'' (Hayek, 1945).  Hayek's emphasis on information, agent planning, and agent actions led to a novel theory of money and economic cycles for which he won the Nobel prize in 1974.  
+\\
+\\
+The goal of this paper is threefold: to clarify certain aspects of Neo-Classical economics for the lay reader, to identify and explain the two competing frameworks for studying human behavior, and to introduce a framework for synthesizing the three frameworks.  
+
+\section{Neo-Classical Framework and Results}
+Neo-Classical economics posits that economic agents have utility functions \(U(x)\) that describe the utility, or benefit, from consuming \(x\).  Given the existence of these utility functions, a ``rationale'' actor will seek to maximize his or her utility.  From this seemingly simple framework, a wealth of results have been proved.  
+\\
+\\
+First, if utility functions are convex, then the St. Petersburg paradox is resolved.  The St. Petersburg paradox results from a gamble with the following recipe:
+\begin{enumerate}
+	\item Initialize a payout at 2 dollars
+	\item Flip a coin
+	\item The first time a flip is tails, the game ends with the payout going to the player.
+	\item For every head, double the payout.
+\end{enumerate}
+The expected value of this gamble is infinite.  However, most people will not pay more than a few dollars to play the game.  Utility theory provides an explanation: for convex preferences, the expected value of the utility will be finite.  For a concrete example, consider the simple utility function \(U(x)=ln(x)\).  Then the utility of playing the game remains finite (and relatively small) regardless of the amount of initial wealth of the player.  
+\\
+\\
+Secondly, if utility functions are convex, economic agents exhibit risk-aversion.  This risk-aversion is consistent with observed behavior in financial markets where uncertainty is most visible.  Due to Jenson's inequality, for convex utility functions, the expected utility satisfies \(\mathbb{E}\left[U(x)\right] \leq U(\mathbb{E}[x])\): in other words, agents prefer a certain value then an uncertain value of greater amount.  To provide a concrete example, a risk-averse agent would prefer to receive \(50\) dollars for certain rather than participate in a gamble where a coin is flipped and \(100\) dollars is given for a head and nothing for a tail.  
+\\
+\\
+Thirdly, if utility functions are convex, economies with perfect competition and free exchange of goods will tend towards an ``optimal'' equilibrium.  The mathematics behind this conclusion are complicated, but is a seminal result in Neo-Classical economics.  In large economies, the assumption of convex preferences may be relaxed.  
+\\
+\\
+Finally, much has been made in the popular press over the supposed assumption of rationality from Neo-Classical economics.  The term ``rational'' is an unfortunate historical artifact, and is as related to the colloquial definition of ``rational'' as Einstein's theory of Relativity is to ``moral relativity''.  ``Rationality'' in economics merely puts (minor) constraints on preferences: 
+\begin{enumerate}
+	\item If \(x\) is consumable, and \(y\) is consumable, then \(x\) is preferred to \(y\), \(y\) is preferred to \(x\), or they are equally preferred.  Essentially, the economic agent has a view on every consumable item.  
+	\item If \(x\) is preferred to \(y\) and \(y\) preferred to \(z\), then \(x\) is preferred to \(z\).  
+\end{enumerate}
+More broadly, rationality states that humans act in their own best interest.  All altruistic behavior is mere virtue signaling. While armchair critics of Neo-Classical economics may pose as self-evident that humans are not ``rational'', the very existence of prices evidences that there exists agents whose behavior is consistent with economic rationality.   
+
+
+\section{Prospect Theory}
+
+Prospect theory was developed to explain two anomalies from predicted economic behavior in controlled experiments.  The first is that the way in which a gamble was explained changed people's willingness to participate in the gamble.  The consumption bundle \(x\) did not change; merely the way it was introduced was changed.  Traditional utility maximization would consider \(x\) only; not the way in which \(x\) was presented.  This first anomaly is called ``framing''.  The second anomaly is that agents over-weighted small probability events above and beyond the traditional risk-aversion from utility theory.  Kahneman and Tversky call this anomaly ``Non-Linear Preferences''.  I will use this terminology though in the classical literature preferences refers to utility functions, which are nearly always assumed to be non-linear. The next two sections detail the two anomalies and provide potential interpretations for each anomaly.  
+
+\subsection{Framing}
+
+While framing existed unequivocally in Kahneman and Tversky's experiments, they were by necessity conducted without ``real world'' stakes.  It is possible that humans exhibit more traditional economic behaviors when confronted with a material decision.  However, I will assume that framing exists and that it exists at any level of materiality.  
+\\
+\\
+Framing itself does not state that utility maximization is incorrect.  There are two ways to interpret framing in a way that retains consistency with utility-maximization.  First, the framing itself is part of the consumption bundle.  In this interpretation, the framing of the gamble changes the value of the bundle.  In a positive framing, the consumption bundle is \(x+f_1\) while in a negative framing the consumption bundle is \(x-f_2\).  However, such an interpretation would require the framing to have an outsized impact on the value of the bundle.  It is unlikely that \(f_1\) or \(f_2\) would be large enough to make the two bundles materially different.  
+\\
+\\
+The second interpretation is that the framing adjusted the agent's utility function.  Many results from Neo-Classical economic theory assume or posit a static utility function.  However, Neo-Classical theory does not require utility functions to be static: only that they are consistent at any given point in time.  Utility functions clearly adjust through time.  Arguably, successful and happy individuals are those that can accurately predict their future utility functions as they age and so make choices that are consistent both with their current utility and with their future utility.  Note that a time-dependent utility function is a distinct concept from common models of inter-temporal consumption and savings behavior which is still applicable with static utility functions.
+
+\subsection{Non-Linear Preferences}
+While Neo-Classical economics typically rely on non-linear utility functions, Kahneman and Tversky extend the expected utility framework to include ``re-weighting'' of the ``true'' probabilities to reflect their experimental evidence that humans overweight rare outcomes.  In my opinion, this is their most interesting contribution to economics.  There is no intuitive way to account for this outcome in traditional Neo-Classical economics.  The result begs the question: what impact does this outcome have on the results of Neo-Classical economics?  I explore this question in section \ref{research}.  
+
+\section{Austrian Theory}
+
+\subsection{Background}
+Austrian theory has long been skeptical of the mathematical treatment of economics (De Soto 2006) including the reliance on utility theory.  Hayek described economics as a framework for utilizing knowledge for coordinating economic outcomes.  In this framework, individuals have their own idiosyncratic sets of information including unique views on future demand and supply.  Humans use these unique views to plan and execute.  Individuals are unique positioned to distill constant updates to their economic environment and adjust their activity.  Utility theory does not illuminate; rather it disguises fundamental aspects of economic behavior.  For Hayek, dynamic preferences are a fundamental fact.  From a policy perspective, any action that distorts individual's views will cause mis-allocation of resources: left to their own devices, people will make occasional and idiosyncratic economic mistakes, but policy actions may cause individuals to make economic miscalculation en-masse.  This framework explains the Austrians' famous distrust of monetary policy.  
+
+\subsection{Neo-Classical Interpretation}
+
+Framed in Neo-Classical terminology, the Austrian focus is on inter-temporal utility functions.  The Neo-Classical response to Austrian Economics is similar to Prospect Theory: while many Neo-Classical models focus on static functions, there is nothing preventing more dynamic models (save, perhaps, mathematical tractability).  
+
+
+\section{Synthesis} \label{research}
+
+As exemplified in the sections on Prospect Theory and Austrian Theory, Neo-Classical economics is rich enough to encompass most of the two theories.  I believe there are only two aspects for which Neo-Classical economics false short: the non-linear preferences for Prospect Theory, and the emphasis on dynamic behavior in Austrian theory.  
+\\
+\\
+As a solution for the observed non-linear preferences found experimentally, Kahneman and Tversky propose re-weighting the probabilities.  While never explicitly expressed in their papers, this solution is essentially a change of measure from a ``real-world'' probability to a ``preference-neutral'' probability.  In other words, the problem that an agent maximizes is not \(\mathbb{E}\left[U(x)\right]\) but rather \(\mathbb{E}_Q\left[U(x)\right]\) where \(\mathbb{E}_Q\) represents the probability under the ``subjective'' measure \(\mathbb{Q}\).  As an aside, the option pricing problem is another area of economics where changes of measure are used.  It is important to note that option pricing is firmly aligned with classic utility theory: the change of measure embeds the utility function within the updated measure.  In Prospect Theory, the measure change does not embed the utility function which still exists separately from the measure change.  
+
+\subsection{Implication for Neo-Classic Theory}
+
+What does the re-formulation of the non-linear preference as an expectation accomplish?  It allows us to say that there is \emph{no impact} on the general neo-classical results.  All the proofs still apply. 
+\\
+\\
+That said, it may call into question some of the assumptions for specific papers.  Policy implications based on assumed behavior in the presence of uncertainty may mis-estimate the extent of the impact.  Indeed, in some cases, it may have an opposite intended impact. 
+\\
+\\
+The change in measure also addresses the risk-loving aspects of lotteries.  Lotteries are designed to have ticket costs that are higher than the expected gain.  Agents who purchase lottery tickets are behaving in a risk-loving manner.  Most of these agents are risk-averse in other aspects of their behavior.  To demonstrate how a change of measure can accommodate risk-loving behavior, consider again an agent with utility function \(U(x)=\ln(x)\) and with initial wealth \(50\).  Let the real-world probability of winning the lottery be \(1/1000\), the price of a ticket is \(1\), and the payout is \(990\) dollars.  The utility of the real-world expected wealth is \(\ln(49.99)\approx 3.91\).  The real-world expected utility is \(\ln(1039)/1000+\ln(49)*999/1000 \approx 3.89 \).  A rational agent would not buy a ticket using real-world probabilities since the utility of the purchasing the ticket is less than not purchasing the ticket.  Now, let the preference-neutral probability for winning the lottery be \(1/100\).  The utility is now \(\ln(1039)/100+\ln(49)*99/100 \approx 3.92 \).  The ``rational'' agent will now buy a ticket despite having a convex utility function.  
+
+\subsection{Implications for Austrian Theory}
+
+In some ways, the results from Prospect Theory are a vindication for Austrians.  Austrians have always emphasized the subjective nature of economics and human behavior.  Changes in the probability measure from a ``real'' measure to a ``subjective'' measure is more consistent with how Austrians view the world.  
+
+\subsection{Implication for Option Pricing}
+
+Much of the literature around option pricing since the 1988 market crash has been about the ``fat tails'' exhibited in option prices (Carr and Wu 2004).  Option prices consistently ``over-price'' the probability of a crash.  This fact has been explained by risk-aversion caused by unknown volatility.  While this explanation is certainly believable, it could also be explained as a subjective over-weighting of low probability ``crash'' events.  That said, practically speaking teasing out the measure changes between the risk-neutral measure and the preference-neutral measure is intractable.  
+
+\section{Real World Considerations}
+
+It is perhaps ironic that both Hayek and Kahneman share similar reasons for skepticism of Neo-Classical economics: Kahneman's policy recommendations for ``nudging'' the electorate conjures images of ``Big Brother'' while Hayek counts Anarcho-Libertarians as his most fervent admirers.  Kahneman, for all his concerns about rationality, shares a common vision with his Neo-Classical brethren: that not only can human behavior be analyzed and explained, but that by better understanding human behavior, it can be improved. But by the very act of interfering, the subjects of an experiment adjust their behavior.  Indeed, this is the Neo-Classical interpretation of Kahneman's experiments: that by altering the frame, the utility function itself changed.  
+\\
+\\
+The largest conclusion from Prospect Theory and Austrian Theory is not that Neo-Classical theory has severe deficiencies.  Rather, the largest conclusion is a warning: a warning that utility is time-dependent and subject to the relatively small caprices of external bodies.  Further, this utility may change in ways that are unexpected.  	
+	
+	
+\end{document}
