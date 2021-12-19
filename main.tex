@@ -121,7 +121,7 @@ Assume axioms one through three hold.  Assume a finite probability space which c
 \end{theorem}
 
 \begin{proof}
-By Debreu's Representation Theorem, axioms 1, 2, and 3 are sufficient and necessary for there to exist a (ordinal) utility function \(g\) representing preferences such that \(g(x_1)\geq g(x_2) \Leftrightarrow x_1 \succeq x_2 \).  Let the realized utility from a set of \(m\) gambles be provided by the following matrix:
+By Debreu's Representation Theorem, axioms 1, 2, and 3 are sufficient and necessary for there to exist an (ordinal) utility function \(g\) representing preferences such that \(g(x_1)\geq g(x_2) \Leftrightarrow x_1 \succeq x_2 \).  Let the realized utility from a set of \(m\) gambles be provided by the following matrix:
 
 \[M=\begin{bmatrix}
 	g(x_{1, 1}) & \ldots & g(x_{1, n})\\
@@ -157,7 +157,9 @@ Where \(c=\sum_i q_i\) and \(u:X \to \mathbb{R}\) is defined as \( u(\cdot)=c g(
 \\
 \\
 The remainder of this proof is demonstrating the existence of \(q\).  If the rank of \(M\) is equal to \(m\), there exists a \(q\) (not necessarily positive) which solves the equation \(Mq=z\) for every \(z\).  If the rank is less than \(m\), then for a solution to exist, the redundant row of \(M\) must have a solution in \(z\) that is consistent.  This is possible since we are free to choose \(z\); consistency in this case is implied by rationality. By this construction, there exists a \(q\) (not necessarily positive) that solves the equation \(Mq=z\).  
-
+\\
+\\
+This is a frustrating proof.  Farka's Lemma doesn't help too much.  I merely need to show that there exists a positive vector \(q\) such that \(Mq\) can be ranked arbitrarily.  I can even make \(M\) all positive if need be.
 
 
 
@@ -167,9 +169,9 @@ The remainder of this proof is demonstrating the existence of \(q\).  If the ran
 
 \section{Application to Allais Paradox}
 
-The outcomes of the gambles in the Allais paradox can be written as the following matrix:
+The outcomes of the gambles in the Allais paradox can be written as the following matrix (in millions):
 
-\[M^T=\begin{bmatrix}
+\[X^T=\begin{bmatrix}
 1 & 0 & 0 & 0 \\
 1 & 1 & 0 & 0 \\
 1 & 5 & 0 & 0 \\
