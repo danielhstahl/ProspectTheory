@@ -111,29 +111,29 @@ Allais's paradox as well as subsequent empirical work by Kahneman and Tversky pr
 \section{Existence of Utility Function and Probability Measure}
 
 \begin{theorem} \label{theorem1}
-Assume the existence of an (ordinal) utility function \(g\) representing preferences such that \(g(x_1)\geq g(x_2) \Leftrightarrow x_1 \succeq x_2 \).  Assume a probability space which contains the outcomes of all relevant gambles.  Further assume that there exists a measure \(v\) equivalent to the real-world measure such that \(\int_\Omega \frac{g(\sigma_1)}{g(\sigma_2)} dv(\omega)\geq 1\).  Then there exists a function \(u: X \to \mathbb{R}\) and a probability measure \(\mathbb{Q}\) equivalent to the ``physical'' measure \(\mathbb{P}\) such that \(\mathbb{E}_Q\left[u(\sigma_1)\right] \geq \mathbb{E}_Q\left[u(\sigma_2)\right]\) if and only if \(\sigma_1 \succeq \sigma_2\).  
+Assume the existence of an (ordinal) utility function \(g\) representing preferences such that \(g(x_1)\geq g(x_2) \Leftrightarrow x_1 \succeq x_2 \).  Assume a probability space which contains the outcomes of all relevant gambles.  Further assume that there exists a measure \(v\) equivalent to the real-world measure such that \(\int_\Omega \frac{a+b g(\sigma_1)}{a+b g(\sigma_2)} dv(\omega)\geq 1\) for some constants \(a\,,b\in \mathbb{R}\).  Then there exists a function \(u: X \to \mathbb{R}\) and a probability measure \(\mathbb{Q}\) equivalent to the ``physical'' measure \(\mathbb{P}\) such that \(\mathbb{E}_Q\left[u(\sigma_1)\right] \geq \mathbb{E}_Q\left[u(\sigma_2)\right]\) if and only if \(\sigma_1 \succeq \sigma_2\).  
 \end{theorem} %% Under what conditions would a \(dv(\omega)\) such that \(\int_\Omega \frac{g(\sigma_1)}{g(\sigma_2)} dv(\omega)>1\) even exist?
 
 \begin{proof}
-Note that by Debreu's Representation Theorem axioms 1, 2, and 3 are sufficient and necessary for the existence of the ordinal utility function \(g\).  I can denote the real-world expectation of the two gambles as \(\mathbb{E}[g(\sigma_1)]\) and \(\mathbb{E}[g(\sigma_2)]\). If \(\mathbb{E}[g(\sigma_1)]\geq\mathbb{E}[g(\sigma_2)]\) and \(\sigma_1 \succeq \sigma_2\), then \(\mathbb{Q}\) can be chosen to be \(\mathbb{P}\) and \(u(\cdot)\) can be chosen to be \(g(\cdot)\); and the work is done.  The interesting case is when \(\mathbb{E}[g(\sigma_1)]<\mathbb{E}[g(\sigma_2)]\) while \(\sigma_1 \succeq \sigma_2\).  Note that since \(g\) is ordinal I can always choose it to be positive.  This lets me define a new probability measure:
+Note that by Debreu's Representation Theorem axioms 1, 2, and 3 are sufficient and necessary for the existence of the ordinal utility function \(g\).  I can denote the real-world expectation of the two gambles as \(\mathbb{E}[g(\sigma_1)]\) and \(\mathbb{E}[g(\sigma_2)]\). If \(\mathbb{E}[g(\sigma_1)]\geq\mathbb{E}[g(\sigma_2)]\) and \(\sigma_1 \succeq \sigma_2\), then \(\mathbb{Q}\) can be chosen to be \(\mathbb{P}\) and \(u(\cdot)\) can be chosen to be \(g(\cdot)\); and the work is done.  The interesting case is when \(\mathbb{E}[g(\sigma_1)]<\mathbb{E}[g(\sigma_2)]\) while \(\sigma_1 \succeq \sigma_2\).  Note that since \(g\) is ordinal I can always choose \(u=a+bg\) such that \(u\) is positive.  This lets me define a new probability measure:
 
-\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{g(\sigma_1)}{g^2(\sigma_2)} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\] 
-Where \(\alpha=\int_\Omega \frac{g(\sigma_1)}{g^2(\sigma_2)} dv(\omega) \), \(\mu\) is the real-world probability measure, and \(v\) is a ``free'' probability measure equivalent to the real-world measure.  Armed with this new measure, we can compute the new expectations:
+\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{u(\sigma_1)}{u^2(\sigma_2)} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\] 
+Where \(\alpha=\int_\Omega \frac{u(\sigma_1)}{u^2(\sigma_2)} dv(\omega) \), \(\mu\) is the real-world probability measure, and \(v\) is a ``free'' probability measure equivalent to the real-world measure.  Armed with this new measure, we can compute the new expectations:
 
-\[\mathbb{E}_Q[g(\sigma_1)]=\frac{1}{\alpha} \int_\Omega \frac{g^2(\sigma_1)}{g^2(\sigma_2)} dv(\omega)\]
-\[\mathbb{E}_Q[g(\sigma_2)]=\frac{1}{\alpha} \int_\Omega \frac{g(\sigma_1)}{g(\sigma_2)} dv(\omega)\]
+\[\mathbb{E}_Q[u(\sigma_1)]=\frac{1}{\alpha} \int_\Omega \frac{u^2(\sigma_1)}{u^2(\sigma_2)} dv(\omega)\]
+\[\mathbb{E}_Q[u(\sigma_2)]=\frac{1}{\alpha} \int_\Omega \frac{u(\sigma_1)}{u(\sigma_2)} dv(\omega)\]
 
-Recall the assumption that \(v\) can be chosen so that \(\int_\Omega \frac{g(\sigma_1)}{g(\sigma_2)} dv(\omega)\geq 1\).  Then by Jenson's inequality, 
-\[\alpha \mathbb{E}_Q[g(\sigma_1)] \geq   \alpha^2 \mathbb{E}_Q[g(\sigma_2)]^2 \geq  \alpha \mathbb{E}_Q[g(\sigma_2)] \implies \mathbb{E}_Q[g(\sigma_1)] \geq \mathbb{E}_Q[g(\sigma_2)] \]
+Recall the assumption that \(v\) can be chosen so that \(\int_\Omega \frac{u(\sigma_1)}{u(\sigma_2)} dv(\omega)\geq 1\).  Then by Jenson's inequality, 
+\[\alpha \mathbb{E}_Q[u(\sigma_1)] \geq   \alpha^2 \mathbb{E}_Q[u(\sigma_2)]^2 \geq  \alpha \mathbb{E}_Q[u(\sigma_2)] \implies \mathbb{E}_Q[u(\sigma_1)] \geq \mathbb{E}_Q[u(\sigma_2)] \]
 
 While this proof shows how to construct \emph{a} probability measure, there may be multiple probability measures that can represent preferences as expectations. 
 
 \end{proof}
 
 \begin{corollary}\label{corr1}
-	If gambles \(\sigma_3\) and \(\sigma_4\) are independent of gambles \(\sigma_1\) and \(\sigma_2\) under measure \(v\), \(\mathbb{E}[g(\sigma_1)] < \mathbb{E}[g(\sigma_2)]\), and \(\mathbb{E}[g(\sigma_3)] < \mathbb{E}[g(\sigma_4)]\), then under the measure defined as 
-	\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{g(\sigma_1)g(\sigma_3)}{g^2(\sigma_2)g^2(\sigma_4)} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\]
-	\(\mathbb{E}_Q[g(\sigma_1)]\geq\mathbb{E}_Q[g(\sigma_2)]\) and \(\mathbb{E}_Q[g(\sigma_3)]\geq\mathbb{E}_Q[g(\sigma_4)]\) where \(\alpha=\int_\Omega \frac{g(\sigma_1)g(\sigma_3)}{g^2(\sigma_2)g^2(\sigma_4)} dv(\omega) \).
+	If gambles \(\sigma_3\) and \(\sigma_4\) are independent of gambles \(\sigma_1\) and \(\sigma_2\) under measure \(v\), \(\mathbb{E}[u(\sigma_1)] < \mathbb{E}[u(\sigma_2)]\), and \(\mathbb{E}[u(\sigma_3)] < \mathbb{E}[u(\sigma_4)]\), then under the measure defined as 
+	\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{u(\sigma_1)u(\sigma_3)}{u^2(\sigma_2)g^2(\sigma_4)} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\]
+	\(\mathbb{E}_Q[u(\sigma_1)]\geq\mathbb{E}_Q[u(\sigma_2)]\) and \(\mathbb{E}_Q[u(\sigma_3)]\geq\mathbb{E}_Q[u(\sigma_4)]\) where \(\alpha=\int_\Omega \frac{u(\sigma_1)u(\sigma_3)}{u^2(\sigma_2)u^2(\sigma_4)} dv(\omega) \).
 \end{corollary}
 
 \begin{proof}
@@ -158,7 +158,7 @@ Assuming a starting wealth of \(\$100,000\) and a log utility function, the (ord
 	13.911 & 15.445  \\
 \end{bmatrix}\]
 
-The expected utility from these two outcomes under the real-world measure is 
+Since these values are positive, I set \(u=g\).  The expected utility from these two outcomes under the real-world measure is 
 
 \begin{center} 
 	\begin{tabular}{c c}
