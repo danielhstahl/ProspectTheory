@@ -1,0 +1,17 @@
+name: run_python
+on:
+  push:
+ 
+jobs:
+  build:
+    name: run python
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: install libraries
+      run: |
+        pip3 install -r requirements.txt
+    - name: run script
+      run: |
+        python3 main.py

@@ -10,6 +10,8 @@
 \setlength{\parindent}{0cm}
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \begin{document}
 	
 	
@@ -38,7 +40,7 @@ The von Nuemann-Morgenstern theorem states that given a set of axioms, there exi
 	\item \textbf{Independence}.  \(\forall x_1, \, x_2,\,x_3 \in X\) and \(\alpha \in [0,\,1]\), \(x_1 \succeq  x_2 \Leftrightarrow \alpha x_1+(1-\alpha)x_3 \succeq  \alpha x_2 +(1-\alpha)x_3\)
 \end{enumerate}
 
-Only the first two axioms are required for rationality.  The last two are only required in order to demonstrate the existence of a utility function.  This proves that humans may be rationale even if no such utility function exists.  
+Only the first two axioms are required for rationality.  The third is required to ensure the existence of a utility function.  The last is required to ensure that preferences in an uncertain world can be represented by taking expectations.  Humans may be rationale even if no utility function exists.  
 \\
 \\
 This theorem is powerful: it provides theoretical justification for using the mathematical language of expected utility as a toolkit for explaining human preferences and behavior.  However, the proof relies heavily on all four axioms.  If one of the axioms is shown to be false, the proof fails.  
@@ -111,11 +113,19 @@ Allais's paradox as well as subsequent empirical work by Kahneman and Tversky pr
 \section{Existence of Utility Function and Probability Measure}
 
 \begin{theorem} \label{theorem1}
-Assume the existence of an (ordinal) utility function \(g\) representing preferences such that \(g(x_1)\geq g(x_2) \Leftrightarrow x_1 \succeq x_2 \).  Assume a probability space which contains the outcomes of all relevant gambles.  Further assume that there exists a measure \(v\) equivalent to the real-world measure such that \(\int_\Omega \frac{a+b g(\sigma_1)}{a+b g(\sigma_2)} dv(\omega)\geq 1\) for some constants \(a\,,b\in \mathbb{R}\).  Then there exists a function \(u: X \to \mathbb{R}\) and a probability measure \(\mathbb{Q}\) equivalent to the ``physical'' measure \(\mathbb{P}\) such that \(\mathbb{E}_Q\left[u(\sigma_1)\right] \geq \mathbb{E}_Q\left[u(\sigma_2)\right]\) if and only if \(\sigma_1 \succeq \sigma_2\).  
-\end{theorem} %% Under what conditions would a \(dv(\omega)\) such that \(\int_\Omega \frac{g(\sigma_1)}{g(\sigma_2)} dv(\omega)>1\) even exist?
+Assume the first three axioms, which implies the existence of an (ordinal) utility function \(g\) representing preferences such that \(g(x_1)\geq g(x_2) \Leftrightarrow x_1 \succeq x_2 \).  Assume a probability space which contains the outcomes of all relevant gambles. Then there exists a function \(u: X \to \mathbb{R}\) and a probability measure \(\mathbb{Q}\) equivalent to the ``physical'' measure \(\mathbb{P}\) such that \(\mathbb{E}_Q\left[u(\sigma_1)\right] \geq \mathbb{E}_Q\left[u(\sigma_2)\right]\) if and only if \(\sigma_1 \succeq \sigma_2\).  
+\end{theorem} 
 
 \begin{proof}
-Note that by Debreu's Representation Theorem axioms 1, 2, and 3 are sufficient and necessary for the existence of the ordinal utility function \(g\).  I can denote the real-world expectation of the two gambles as \(\mathbb{E}[g(\sigma_1)]\) and \(\mathbb{E}[g(\sigma_2)]\). If \(\mathbb{E}[g(\sigma_1)]\geq\mathbb{E}[g(\sigma_2)]\) and \(\sigma_1 \succeq \sigma_2\), then \(\mathbb{Q}\) can be chosen to be \(\mathbb{P}\) and \(u(\cdot)\) can be chosen to be \(g(\cdot)\); and the work is done.  The interesting case is when \(\mathbb{E}[g(\sigma_1)]<\mathbb{E}[g(\sigma_2)]\) while \(\sigma_1 \succeq \sigma_2\).  Note that since \(g\) is ordinal I can always choose \(u=a+bg\) such that \(u\) is positive.  This lets me define a new probability measure:
+Debreu's Representation Theorem axioms 1, 2, and 3 are sufficient and necessary for the existence of the ordinal utility function \(g\).  I can denote the real-world expectation of the two gambles as \(\mathbb{E}[g(\sigma_1)]\) and \(\mathbb{E}[g(\sigma_2)]\). 
+
+\subsubsection*{Case 1}
+
+If \(\mathbb{E}[g(\sigma_1)]\geq\mathbb{E}[g(\sigma_2)]\) and \(\sigma_1 \succeq \sigma_2\), then \(\mathbb{Q}\) can be chosen to be \(\mathbb{P}\) and \(u(\cdot)\) can be chosen to be \(g(\cdot)\); and the work is done. Note that this will be the case under any measure if the outcome of \(\sigma_2\) is prefered to the outcome of \(\sigma_1\) in all states.
+
+\subsubsection*{Case 2}
+
+The interesting case is when \(\mathbb{E}[g(\sigma_1)]<\mathbb{E}[g(\sigma_2)]\) while \(\sigma_1 \succeq \sigma_2\).  Note that since \(g\) is ordinal I can always choose \(u=a+bg\) such that \(u\) is positive.  This lets me define a new probability measure:
 
 \[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{u(\sigma_1)}{u^2(\sigma_2)} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\] 
 Where \(\alpha=\int_\Omega \frac{u(\sigma_1)}{u^2(\sigma_2)} dv(\omega) \), \(\mu\) is the real-world probability measure, and \(v\) is a ``free'' probability measure equivalent to the real-world measure.  Armed with this new measure, we can compute the new expectations:
@@ -123,22 +133,62 @@ Where \(\alpha=\int_\Omega \frac{u(\sigma_1)}{u^2(\sigma_2)} dv(\omega) \), \(\m
 \[\mathbb{E}_Q[u(\sigma_1)]=\frac{1}{\alpha} \int_\Omega \frac{u^2(\sigma_1)}{u^2(\sigma_2)} dv(\omega)\]
 \[\mathbb{E}_Q[u(\sigma_2)]=\frac{1}{\alpha} \int_\Omega \frac{u(\sigma_1)}{u(\sigma_2)} dv(\omega)\]
 
-Recall the assumption that \(v\) can be chosen so that \(\int_\Omega \frac{u(\sigma_1)}{u(\sigma_2)} dv(\omega)\geq 1\).  Then by Jenson's inequality, 
-\[\alpha \mathbb{E}_Q[u(\sigma_1)] \geq   \alpha^2 \mathbb{E}_Q[u(\sigma_2)]^2 \geq  \alpha \mathbb{E}_Q[u(\sigma_2)] \implies \mathbb{E}_Q[u(\sigma_1)] \geq \mathbb{E}_Q[u(\sigma_2)] \]
-
-While this proof shows how to construct \emph{a} probability measure, there may be multiple probability measures that can represent preferences as expectations. 
+Since \(\sigma_1\) is prefered to \(\sigma_2\) in at least some states of the world (or else we would be in Case 1), \(v\) can be chosen so that \(\int_\Omega \frac{u(\sigma_1)}{u(\sigma_2)} dv(\omega)\geq 1\).  For example, \(dv\) could simply be \(\mathbb{I}_{u(\sigma_1)>u(\sigma_2)}\).  Then by Jenson's inequality, 
+\[\mathbb{E}_Q[u(\sigma_1)] \geq   \mathbb{E}_Q[u(\sigma_2)]^2 \geq  \mathbb{E}_Q[u(\sigma_2)] \implies \mathbb{E}_Q[u(\sigma_1)] \geq \mathbb{E}_Q[u(\sigma_2)] \]
 
 \end{proof}
 
 \begin{corollary}\label{corr1}
 	If gambles \(\sigma_3\) and \(\sigma_4\) are independent of gambles \(\sigma_1\) and \(\sigma_2\) under measure \(v\), \(\mathbb{E}[u(\sigma_1)] < \mathbb{E}[u(\sigma_2)]\), and \(\mathbb{E}[u(\sigma_3)] < \mathbb{E}[u(\sigma_4)]\), then under the measure defined as 
-	\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{u(\sigma_1)u(\sigma_3)}{u^2(\sigma_2)g^2(\sigma_4)} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\]
+	\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{u(\sigma_1)u(\sigma_3)}{u^2(\sigma_2)u^2(\sigma_4)} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\]
 	\(\mathbb{E}_Q[u(\sigma_1)]\geq\mathbb{E}_Q[u(\sigma_2)]\) and \(\mathbb{E}_Q[u(\sigma_3)]\geq\mathbb{E}_Q[u(\sigma_4)]\) where \(\alpha=\int_\Omega \frac{u(\sigma_1)u(\sigma_3)}{u^2(\sigma_2)u^2(\sigma_4)} dv(\omega) \).
 \end{corollary}
 
 \begin{proof}
 This follows from theorem \ref{theorem1} and by the fact that \(\mathbb{E}[XY]=\mathbb{E}[X]\mathbb{E}[Y]\) if \(X\) and \(Y\) are independent.  
 \end{proof}
+
+\section{Selecting a Probability Measure}
+
+The previous section shows that a measure could be constructed.  This section proposes a method to construct the measure in a discrete setting.
+
+Let there be \(n\) states of the world, with probability of each state given by the vector 
+\[p = [p_1, p_2, \dotsc, p_n]\]  
+Let there be \(m\) gambles represented by the matrix 
+\[\Sigma = \begin{bmatrix}
+    \sigma_{11}       & \sigma_{12} & \dots & \sigma_{1n} \\
+    \sigma_{21}       & \sigma_{22}  & \dots & \sigma_{2n} \\
+    \hdotsfor{4} \\
+    \sigma_{m1}       & \sigma_{m2} & \dots & \sigma_{mn}
+\end{bmatrix}\]
+
+Permissable gambles implies that the rank of \(\Sigma\) is at most \(n\); that is, if there are more gambles than states in the world then either there are equivalent gambles or there are gambles that are strictly dominated by other gambles and are not relevant for this exercise.  This is a similar argument to the no-arbitrage condition in financial markets.  
+\\
+\\
+It would make sense to identify a measure \(v=yp\) so that \(\mathbb{Q}\) and \(\mathbb{P}\) are "close" to each other.  This motivates a constrained least squares problem:
+
+
+\begin{equation}
+\begin{aligned}
+\min_y \quad \norm{y-\frac{1}{n}} \\
+\textrm{s.t.}\quad u(\Sigma) P y = z\\
+y \geq 0
+\end{aligned}
+\end{equation}
+
+
+
+Where \(z\) is chosen so that the ordering of the outcomes under \(\mathbb{Q}\) aligns with the ordering of preferences and \(P = \diag{(p)}\).  Unfortunately, this type of constrained least squares problem does not have a well-known solution.  Re-forming into an approximation of the original problem,
+
+\begin{equation}
+\begin{aligned}
+\min_y \quad \norm{u(\Sigma) P y + \diag{(\lambda)} y-\left(z+\frac{\lambda}{n}\right)} \\
+y \geq 0
+\end{aligned}
+\end{equation}
+
+Where \(\lambda\) is the ``weight'' given to the least squares component of the optimization problem. This type of non-negative least squares is a well-known problem with packages that can solve it in most popular languages.  In the ``usual'' case that there are fewer gambles than states of the world, \(u(\Sigma) P\) and \(z\) can be padded with zeros so that \(u(\Sigma) P+\diag{(\lambda)}\) is a square matrix and \(z+\frac{\lambda}{n}\) has length \(n\).
+
 
 \subsection{Examples}
 
@@ -168,15 +218,15 @@ Since these values are positive, I set \(u=g\).  The expected utility from these
 	\end{tabular}
 \end{center}
 
-With \(v(\omega)=1/3\) (uniform distribution), the \(\mathbb{Q}\) measure is
+With the unscaled \(v(\omega)=[3.260, 0.017, 0.333]\), the \(\mathbb{Q}\) measure is
 \begin{equation*}
 	\mathbb{Q}(\omega) = \left\{
 		\begin{array}{rl}
-			.446 & \omega = 1 \\
-			.306 & \omega = 2 \\
-			.248 & \omega = 3 \\
+			.40 & \omega = 1 \\
+			.18 & \omega = 2 \\
+			.42 & \omega = 3 \\
 		\end{array} \right.
-\end{equation*}
+\end{equation*} 
 
 Under this measure, the expected utility for each outcome is 
 
@@ -184,11 +234,9 @@ Under this measure, the expected utility for each outcome is
 	\begin{tabular}{c c}
 		& Expected Utility under \(\mathbb{Q}\) \\
 		Choice 1 Option 1 & 13.911 \\
-		Choice 1 Option 2 & 13.221 \\
+		Choice 1 Option 2 & 13.576 \\
 	\end{tabular}
 \end{center}
-
-Note that \(\int_\Omega \frac{g(\sigma_1)}{g(\sigma_2)} dv(\omega)=1.03632 > 1\).
 
 \subsubsection{Allias Paradox all choices}
 
@@ -227,18 +275,18 @@ Using the same utility function as in the first example,
 \end{bmatrix}\]
 
 
-Using corollary \ref{corr1}, with \(v(\omega)=1/12\) (uniform distribution) the expected utility for each outcome is 
+Using corollary \ref{corr1}, with the (unscaled) \[v(\omega)=[5.960, 0.045, 0.614, 2.605, 0.083, 0.083, 0.083, 0.083, 0.083, 0.083, 0.083, 0.083]\] the expected utility for each outcome is 
 
 \begin{center} 
 	\begin{tabular}{c c}
 		& Expected Utility under \(\mathbb{Q}\) \\
 		Choice 1 Option 1 & 13.911 \\
-		Choice 1 Option 2 & 13.221 \\
-		Choice 2 Option 1 & 12.488 \\
-		Choice 2 Option 2 & 13.766 \\
+		Choice 1 Option 2 & 13.622 \\
+		Choice 2 Option 1 & 11.702 \\
+		Choice 2 Option 2 & 11.734 \\
 	\end{tabular}
 \end{center}
 
-This resolves the paradox.  Note that since choice 2 option 1 already had lower utility than choice 2 option 2 under the real world measure, the real-world measure could have been used for choice 2; but I used the modified measure to demonstrate the corollary.  
+This resolves the paradox.  
 	
 \end{document}
