@@ -165,30 +165,18 @@ Let there be \(m\) gambles represented by the matrix
 Permissable gambles implies that the rank of \(\Sigma\) is at most \(n\); that is, if there are more gambles than states in the world then either there are equivalent gambles or there are gambles that are strictly dominated by other gambles and are not relevant for this exercise.  This is a similar argument to the no-arbitrage condition in financial markets.  
 \\
 \\
-It would make sense to identify a measure \(v=yp\) so that \(\mathbb{Q}\) and \(\mathbb{P}\) are "close" to each other.  This motivates a constrained least squares problem:
+It would make sense to identify a measure \(v\) so that \(\mathbb{Q}\) and \(\mathbb{P}\) are "close" to each other.  This motivates a constrained least squares problem:
 
 
 \begin{equation}
 \begin{aligned}
-\min_y \quad \norm{y-\frac{1}{n}} \\
-\textrm{s.t.}\quad u(\Sigma) P y = z\\
+\min_v \quad \norm{v-p} \\
+\textrm{s.t.}\quad u(\Sigma) y = z\\
 y \geq 0
 \end{aligned}
 \end{equation}
 
-
-
-Where \(z\) is chosen so that the ordering of the outcomes under \(\mathbb{Q}\) aligns with the ordering of preferences and \(P = \diag{(p)}\).  Unfortunately, this type of constrained least squares problem does not have a well-known solution.  Re-forming into an approximation of the original problem,
-
-\begin{equation}
-\begin{aligned}
-\min_y \quad \norm{u(\Sigma) P y + \diag{(\lambda)} y-\left(z+\frac{\lambda}{n}\right)} \\
-y \geq 0
-\end{aligned}
-\end{equation}
-
-Where \(\lambda\) is the ``weight'' given to the least squares component of the optimization problem. This type of non-negative least squares is a well-known problem with packages that can solve it in most popular languages.  In the ``usual'' case that there are fewer gambles than states of the world, \(u(\Sigma) P\) and \(z\) can be padded with zeros so that \(u(\Sigma) P+\diag{(\lambda)}\) is a square matrix and \(z+\frac{\lambda}{n}\) has length \(n\).
-
+Where \(z\) is the ``actual'' utility and whose ordering of the outcomes under \(\mathbb{Q}\) aligns with the ordering of preferences.  This problem can be solved using Quadratic Programming, and many languages have libraries capable of this optimization. 
 
 \subsection{Examples}
 
@@ -218,15 +206,7 @@ Since these values are positive, I set \(u=g\).  The expected utility from these
 	\end{tabular}
 \end{center}
 
-With the unscaled \(v(\omega)=[3.260, 0.017, 0.333]\), the \(\mathbb{Q}\) measure is
-\begin{equation*}
-	\mathbb{Q}(\omega) = \left\{
-		\begin{array}{rl}
-			.40 & \omega = 1 \\
-			.18 & \omega = 2 \\
-			.42 & \omega = 3 \\
-		\end{array} \right.
-\end{equation*} 
+With a quadratic programming solver, a possible \(v\) is chosen as \(v(\omega)=[0.208, 0.735 0.057]\).
 
 Under this measure, the expected utility for each outcome is 
 
@@ -234,7 +214,7 @@ Under this measure, the expected utility for each outcome is
 	\begin{tabular}{c c}
 		& Expected Utility under \(\mathbb{Q}\) \\
 		Choice 1 Option 1 & 13.911 \\
-		Choice 1 Option 2 & 13.576 \\
+		Choice 1 Option 2 & 13.5 \\
 	\end{tabular}
 \end{center}
 
@@ -274,16 +254,17 @@ Using the same utility function as in the first example,
 	13.911 & 15.445  & 13.911  & 15.445 \\
 \end{bmatrix}\]
 
+Using corollary \ref{corr1}, a possible \(v\) is chosen as \[v(\omega)=[g]\] 
 
-Using corollary \ref{corr1}, with the (unscaled) \[v(\omega)=[5.960, 0.045, 0.614, 2.605, 0.083, 0.083, 0.083, 0.083, 0.083, 0.083, 0.083, 0.083]\] the expected utility for each outcome is 
+Under this measure, the expected utility for each outcome is 
 
 \begin{center} 
 	\begin{tabular}{c c}
 		& Expected Utility under \(\mathbb{Q}\) \\
 		Choice 1 Option 1 & 13.911 \\
-		Choice 1 Option 2 & 13.622 \\
-		Choice 2 Option 1 & 11.702 \\
-		Choice 2 Option 2 & 11.734 \\
+		Choice 1 Option 2 & 13.5 \\
+		Choice 2 Option 1 & 11.51 \\
+		Choice 2 Option 2 & 11.71 \\
 	\end{tabular}
 \end{center}
 

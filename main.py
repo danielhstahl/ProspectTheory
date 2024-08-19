@@ -1,12 +1,12 @@
 import numpy as np
-from scipy.optimize import nnls
+from scipy.optimize import minimize
 from typing import Tuple
 
 
 def create_basic_allais() -> Tuple[np.array, np.array, np.array]:
     M = np.array([[13.911, 13.911, 13.911], [11.513, 13.911, 15.445]])
     p = np.array([0.01, 0.89, 0.1])
-    z = np.array([2, 1])  # slight preference for the sure thing
+    z = np.array([13.911, 13.5])  # slight preference for the sure thing
     return M, p, z
 
 
@@ -87,35 +87,58 @@ def create_complex_allais() -> Tuple[np.array, np.array, np.array]:
             0.00110,
         ]
     )
-    z = np.array([5, 2, 2, 3])
+    z = np.array([13.911, 13.5, 11.5, 11.7])
     return M, p, z
 
 
-def get_q(M, p, z, lmbda):
-    n = len(p)
-    m = len(z)
-    MP = np.matmul(M, np.diag(p))
-    lmbda_mat = np.diag(np.full(n, lmbda))
-    unif = np.ones(n) * (lmbda / n)
-    padded_MP = np.pad(MP, ((0, n - m), (0, 0)))
-    padded_z = np.pad(z, (0, n - m))
-    x_approx_sol, x_residuals = nnls(padded_MP + lmbda_mat, padded_z + unif)
-    q = x_approx_sol * p
-    q = q / sum(q)
-    return (x_approx_sol, q, np.matmul(M, q))
+def _loss(v, p):
+    return sum(np.square(v - p))
+
+
+def jac(v):
+    return 2 * v
+
+
+def get_q(M, p, z):
+
+    x0 = np.random.uniform(0.0, 1.0, len(p))
+    cons = [
+        {
+            "type": "ineq",
+            "fun": lambda x: x - np.ones(len(x)) * min(p),
+            "jac": lambda x: np.diag(np.ones(len(x))),
+        },
+        {"type": "eq", "fun": lambda x: np.matmul(M, x) - z, "jac": lambda x: M},
+    ]
+    result = minimize(
+        lambda x: _loss(x, p),
+        x0,
+        jac=jac,
+        constraints=cons,
+        method="SLSQP",
+        options={
+            "disp": False,
+            "ftol": 1,
+        },  # huge tolerance, don't need to be that close
+    )
+    q = result.x / sum(result.x)
+    utility = np.matmul(M, q)
+    if result.success:
+        return q, utility
+    else:
+        print(result)
+        print("q", q)
+        print("utility", utility)
+        raise Exception("Failed to converge")
 
 
 if __name__ == "__main__":
     M, p, z = create_basic_allais()
-    lmbda = 0.3
-    sol, q_basic, result_basic = get_q(M, p, z, lmbda)
-    print(sol)
+    q_basic, result_basic = get_q(M, p, z)
     print(q_basic)
     print(result_basic)
 
     M, p, z = create_complex_allais()
-    lmbda = 0.5
-    sol, q_complex, result_complex = get_q(M, p, z, lmbda)
-    print(sol)
+    q_complex, result_complex = get_q(M, p, z)
     print(q_complex)
     print(result_complex)
