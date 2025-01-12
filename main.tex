@@ -49,7 +49,7 @@ The von Nuemann-Morgenstern theorem states that given a set of axioms, there exi
 	\item \textbf{Independence}.  \(\forall x_1, \, x_2,\,x_3 \in X\) and \(\alpha \in [0,\,1]\), \(x_1 \succeq  x_2 \Leftrightarrow \alpha x_1+(1-\alpha)x_3 \succeq  \alpha x_2 +(1-\alpha)x_3\)
 \end{enumerate}
 
-Only the first two axioms are required for rationality.  The third is required to ensure the existence of a utility function.  The last is required to ensure that preferences in an uncertain world can be represented by taking expectations.  Humans may be rationale even if no utility function exists.  
+Only the first two axioms are required for rationality.  The third is required to ensure the existence of a utility function.  The last is required to ensure that preferences in an uncertain world can be represented by taking expectations.  Humans may be rational even if no utility function exists.  
 \\
 \\
 This theorem is powerful: it provides theoretical justification for using the mathematical language of expected utility as a toolkit for explaining human preferences and behavior.  However, the proof relies heavily on all four axioms.  If one of the axioms is shown to be false, the proof fails.  
@@ -151,7 +151,7 @@ Since \(\sigma_1\) is preferred to \(\sigma_2\) in at least some states of the w
 \end{corollary}
 
 \begin{proof}
-This follows from theorem \ref{theorem1} and by the fact that \(\mathbb{E}[XY]=\mathbb{E}[X]\mathbb{E}[Y]\) if \(X\) and \(Y\) are independent.  
+This follows from Theorem \ref{theorem1} and by the fact that \(\mathbb{E}[XY]=\mathbb{E}[X]\mathbb{E}[Y]\) if \(X\) and \(Y\) are independent.  
 \end{proof}
 
 \section{Selecting a Probability Measure}
@@ -171,14 +171,13 @@ Let there be \(m\) gambles represented by the matrix
 Permissible gambles implies that the rank of \(\Sigma\) is at most \(n\); that is, if there are more gambles than states in the world then either there are equivalent gambles or there are gambles that are strictly dominated by other gambles and are not relevant for this exercise.  This is a similar argument to the no-arbitrage condition in financial markets.  
 \\
 \\
-Parsimony suggests identifying a measure \(v\) so that \(\mathbb{Q}\) and \(\mathbb{P}\) are "close" to each other.  This motivates a constrained least squares problem:
-
+Parsimony suggests identifying a measure \(v\) so that \(\mathbb{Q}\) and \(\mathbb{P}\) are ``close'' to each other.  This motivates a constrained least squares problem:
 
 \begin{equation}
 \begin{aligned}
 \min_v \quad \norm{v-p} \\
-\textrm{s.t.}\quad u(\Sigma) y = z\\
-y \geq 0
+\textrm{s.t.}\quad u(\Sigma) v = z\\
+v \geq 0
 \end{aligned}
 \end{equation}
 
