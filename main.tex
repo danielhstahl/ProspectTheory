@@ -21,10 +21,10 @@
 
 \section{Introduction}
 
-Prospect Theory, introduced by Kahneman and Tversky (1979), has been a cornerstone in behavioral economics, offering an alternative to Expected Utility Theory (EUT) and addressing emperical discrepencies in classic EUT. Unlike EUT, which assumes individuals maximize expected utility, Prospect Theory posits that individuals evaluate outcomes relative to a reference point and weigh probabilities non-linearly. This framework has been instrumental in explaining anomalies such as the Allais Paradox (Allais 1953), which arise under the classical EUT.  
+Prospect Theory, introduced by Kahneman and Tversky (1979), has been a cornerstone in behavioral economics, offering an alternative to Expected Utility Theory (EUT) and addressing emperical discrepencies in classic EUT. Unlike EUT, which assumes individuals maximize expected utility, Prospect Theory posits that individuals evaluate outcomes relative to a reference point and weigh probabilities non-linearly. The outcomes are represented by a (not-everywhere-differentiable) ``value'' function instead of a utility function, and the output of the value function in each state is multiplied by a function of the probability of that state occurring.  This framework has been instrumental in explaining anomalies such as the Allais Paradox (Allais 1953), which can arise under the classical EUT.  
 \\
 \\
-Classic EUT is justified by the von Nuemann-Morgenstern (1947) theorem, which provides four axioms under which an expected utility representation exists to express preferences under uncertainty.  The Allais Paradox was the first challenge to this theorem.  Subsequent empirical work (eg, List (2005)) provides additional evidence that classic EUT is not sufficiently rich to capture human behavior under uncertainty.  Prospect Theory particularly challenges the ``independence'' axiom of the von Nuemann-Morgenstern proof.
+Classic EUT is justified by the von Nuemann-Morgenstern (1947) theorem, which provides four axioms under which an expected utility representation exists to express preferences under uncertainty.  The Allais Paradox was the first challenge to this theorem.  Subsequent empirical work (eg, List (2005)) provides additional evidence that classic EUT is not sufficiently rich to capture human behavior under uncertainty.  Kahneman and Tversky particularly challenge the ``independence'' or ``substitution'' axiom of the von Nuemann-Morgenstern proof.
 \\
 \\
 Kahneman and Tversky's paper sparked additional research and interest in modeling behavior under uncertainty without relying on EUT.  Quiggin (1982) introduced rank-dependent weightings on the probabilities; representing utility as the sum of the utility in each potential outcome weighted by a function of the (cumulative) probability of each outcome. Tversky and Kahneman (1992) incorporated Quiggin's approach, extending Prospect Theory into Cumulative Prospect Theory (CPT).  Research by Wakker and Tversky (1993) further refined the theoretical underpinnings of CPT and contrasted it with EUT.
@@ -33,11 +33,11 @@ Kahneman and Tversky's paper sparked additional research and interest in modelin
 While this literature builds a mathematically rigorous alternative to EUT, financial and economic literature continues to be dominated by EUT.  Notable exceptions include Barberis and Huang (2008) for financial asset pricing, Schmidt and Zank (2008) for analyzing risk-aversion with Prospect Theory, and Gonzalez and Wu (1999) and Prelec (1998) for statistically estimating the cumulative weighting function.  
 \\
 \\
-In this paper, I prove the existence of an expectation representation of preferences without requiring the independence assumption of von Nuemann and Morgenstern.  I show that a measure exists such that preferences which violate the independence axiom can still be represented by an expectation.  This approach has two major benefits over the CPT.  First, the approach is a parsimonious extension of EUT: while a new measure does ``re-weight'' probabilities as in CPT, it does not require rank-ordering preferences or accumulating probabilities.  Second, by allowing an expectation representation, the vast literature built on EUT remains sound despite Kahneman and Tversky's objections. I give a practical example by showing that preferences consistent with Allais' paradox can be represented by expectations.  
+In this paper, I prove the existence of an expectation representation of preferences without requiring the independence assumption of von Nuemann and Morgenstern.  I show that a measure exists such that preferences which violate the independence axiom can still be represented by an expectation.  This approach has two major benefits over the CPT.  First, the approach is a parsimonious extension of EUT: while a new measure does ``re-weight'' probabilities as in CPT, it does not require rank-ordering preferences, accumulating probabilities, or using a non-differentiable value function.  Second, by allowing an expectation representation, the vast literature built on EUT remains sound despite Kahneman and Tversky's objections. I give a practical example by showing that preferences consistent with Allais' paradox can be represented by expectations.  
 
 \section{The von Nuemann-Morgenstern Axioms}
 
-Let \(X\) represent the consumption set available to economic agents.  A bundle \(x \in X\) is a set of consumption options within \(X\).  A gamble \(\sigma\) is a random variable that chooses (potentially) different consumption bundles within \(X\) for various states of the world.  In the language of probability theory, \(\sigma: \Omega \to X\).  I allow gambles to also exist in the consumption set, allowing me to state that \(\sigma \in X\).  Unless otherwise stated, I denote ``deterministic'' consumption bundles as \(x_i \in X\) while I denote gambles as \(\sigma_i \in X\).     
+Let \(X\) represent the consumption set available to economic agents.  A bundle \(x \in X\) is a set of consumption options within \(X\).  A gamble \(\sigma\) is a random variable that chooses (potentially) different consumption bundles within \(X\) for various states of the world.  In the language of probability theory, \(\sigma: \Omega \to X\).  I allow gambles to also exist in the consumption set, allowing me to state that \(\sigma \in X\).  Unless otherwise stated, I denote ``deterministic'' consumption bundles as \(x_i \in X\) while I denote gambles as \(\sigma_i \in X\). 
 \\
 \\
 The von Nuemann-Morgenstern theorem states that given a set of axioms, there exists a function \(u: X \to \mathbf{R}\) such that for all \(\sigma_1, \sigma_2 \in X\), \(\mathbb{E}\left[u(\sigma_1)\right] \geq \mathbb{E}\left[u(\sigma_2)\right]\) if and only if \(\sigma_1 \succeq  \sigma_2\).  These axioms are:
@@ -49,14 +49,13 @@ The von Nuemann-Morgenstern theorem states that given a set of axioms, there exi
 	\item \textbf{Independence}.  \(\forall x_1, \, x_2,\,x_3 \in X\) and \(\alpha \in [0,\,1]\), \(x_1 \succeq  x_2 \Leftrightarrow \alpha x_1+(1-\alpha)x_3 \succeq  \alpha x_2 +(1-\alpha)x_3\)
 \end{enumerate}
 
-Only the first two axioms are required for rationality.  The third is required to ensure the existence of a utility function.  The last is required to ensure that preferences in an uncertain world can be represented by taking expectations.  Humans may be rational even if no utility function exists.  
+Only the first two axioms are required for rationality.  The third is required to ensure the existence of a utility function (agents may be rational even if no utility function exists).  The last axiom, per von Nuemann-Morgenstern's proof, is required to ensure that preferences in an uncertain world can be represented by taking expectations. 
 \\
 \\
 This theorem is powerful: it provides theoretical justification for using the mathematical language of expected utility as a toolkit for explaining human preferences and behavior.  However, the proof relies heavily on all four axioms.  If one of the axioms is shown to be false, the proof fails.  
 \\
 \\
 The proof is constructive, demonstrating how a utility function can be created.  The construction relies on all four axioms.  However, utility functions may still exist if the third and fourth axioms are relaxed.  They simply cannot be constructed in the same way as in the theorem.  In other words, if the independence axiom is not valid, expected utility under the real-world measure \emph{may} still represent preferences, but it is not \emph{guaranteed} to do so.  
- 
 
 \section{The Allais Paradox} 
 
@@ -286,7 +285,7 @@ This resolves the paradox.
 \section{Conclusion}
 
 This paper establishes that preferences can be represented by expectations even without relying on the independence axiom of von Neumann and Morgenstern. A measure exists such that preferences violating the independence axiom can still conform to an expectation representation. The proof is exemplified through preferences consistent with Allais' paradox, demonstrating that economic insights from EUT remain robust despite challenges posed by Kahneman and Tversky. This result suggests that the foundational principles of EUT can still apply to decision-making scenarios that deviate from classical assumptions.
-	
+\newpage
 \subsection*{Bibliography}
 \begin{enumerate}
     \item Allais, M. (1953). Le comportement de l'homme rationnel devant le risque: critique des postulats et axiomes de l'école américaine. \textit{Econometrica}, 21(4), 503-546.
