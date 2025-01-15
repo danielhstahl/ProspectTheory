@@ -2,6 +2,8 @@ import numpy as np
 from scipy.optimize import minimize
 from typing import Tuple
 
+np.set_printoptions(suppress=True)
+
 
 def create_basic_allais() -> Tuple[np.array, np.array, np.array]:
     M = np.array([[13.911, 13.911, 13.911], [11.513, 13.911, 15.445]])
@@ -96,7 +98,7 @@ def _loss(v, p):
 
 
 def jac(v):
-    return 2 * v
+    return 2 * v  # gradient of square of difference between v and p
 
 
 def get_q(M, p, z):
@@ -105,11 +107,16 @@ def get_q(M, p, z):
     cons = [
         {
             "type": "ineq",
-            "fun": lambda x: x - np.ones(len(x)) * min(p),
-            "jac": lambda x: np.diag(np.ones(len(x))),
+            "fun": lambda x: x
+            - np.ones(len(x))
+            * min(p),  # don't allow "x" smaller than smallest real world p
+            "jac": lambda x: np.diag(
+                np.ones(len(x))
+            ),  # jacobian of "fun" (matrix of ones in diagonal)
         },
         {"type": "eq", "fun": lambda x: np.matmul(M, x) - z, "jac": lambda x: M},
     ]
+    # https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html
     result = minimize(
         lambda x: _loss(x, p),
         x0,
@@ -119,7 +126,7 @@ def get_q(M, p, z):
         options={
             "disp": False,
             "ftol": 1,
-        },  # huge tolerance, don't need to be that close
+        },  # huge tolerance to allow more starting positions to "converge" as we don't need to be precise
     )
     q = result.x / sum(result.x)
     utility = np.matmul(M, q)

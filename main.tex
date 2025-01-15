@@ -132,21 +132,23 @@ If \(\mathbb{E}[g(\sigma_1)]\geq\mathbb{E}[g(\sigma_2)]\) and \(\sigma_1 \succeq
 
 The interesting case is when \(\mathbb{E}[g(\sigma_1)]<\mathbb{E}[g(\sigma_2)]\) while \(\sigma_1 \succeq \sigma_2\).  Note that since \(g\) is ordinal I can always choose \(u=a+bg\) such that \(u\) is positive.  This lets me define a new probability measure:
 
-\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{u(\sigma_1)}{u^2(\sigma_2)} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\] 
-Where \(\alpha=\int_\Omega \frac{u(\sigma_1)}{u^2(\sigma_2)} dv(\omega) \), \(\mu\) is the real-world probability measure, and \(v\) is a ``free'' probability measure equivalent to the real-world measure.  Armed with this new measure, we can compute the new expectations:
+\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{u(\sigma_1(\omega))}{u^2(\sigma_2(\omega))} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\] 
+Where \(\alpha=\int_\Omega \frac{u(\sigma_1(\omega))}{u^2(\sigma_2(\omega))} dv(\omega) \), \(\mu\) is the real-world probability measure, and \(v\) is a ``free'' measure that agrees with the real-world measure on which events have measure zero.  Armed with this new measure, we can compute the new expectations:
 
-\[\mathbb{E}_Q[u(\sigma_1)]=\frac{1}{\alpha} \int_\Omega \frac{u^2(\sigma_1)}{u^2(\sigma_2)} dv(\omega)\]
-\[\mathbb{E}_Q[u(\sigma_2)]=\frac{1}{\alpha} \int_\Omega \frac{u(\sigma_1)}{u(\sigma_2)} dv(\omega)\]
+\[\mathbb{E}_Q[u(\sigma_1)]=\frac{1}{\alpha} \int_\Omega \frac{u^2(\sigma_1(\omega))}{u^2(\sigma_2(\omega))} dv(\omega)\]
+\[\mathbb{E}_Q[u(\sigma_2)]=\frac{1}{\alpha} \int_\Omega \frac{u(\sigma_1(\omega))}{u(\sigma_2(\omega))} dv(\omega)\]
 
-Since \(\sigma_1\) is preferred to \(\sigma_2\) in at least some states of the world (or else we would be in Case 1), \(v\) can be chosen so that \(\int_\Omega \frac{u(\sigma_1)}{u(\sigma_2)} dv(\omega)\geq 1\).  For example, \(dv\) could simply be \(\mathbb{I}_{u(\sigma_1)>u(\sigma_2)}\).  Then by Jenson's inequality, 
+Since \(\sigma_1\) is preferred to \(\sigma_2\) in at least some states of the world (or else we would be in Case 1), \(v\) can be chosen so that \(\int_\Omega \frac{u(\sigma_1(\omega))}{u(\sigma_2(\omega))} dv(\omega)\geq 1\).  For example, \(dv\) could simply be \(\mathbb{I}_{u(\sigma_1)>u(\sigma_2)}\).  Then by Jenson's inequality, 
 \[\mathbb{E}_Q[u(\sigma_1)] \geq   \mathbb{E}_Q[u(\sigma_2)]^2 \geq  \mathbb{E}_Q[u(\sigma_2)] \implies \mathbb{E}_Q[u(\sigma_1)] \geq \mathbb{E}_Q[u(\sigma_2)] \]
 
 \end{proof}
 
 \begin{corollary}\label{corr1}
 	If gambles \(\sigma_3\) and \(\sigma_4\) are independent of gambles \(\sigma_1\) and \(\sigma_2\) under measure \(v\), \(\mathbb{E}[u(\sigma_1)] < \mathbb{E}[u(\sigma_2)]\), and \(\mathbb{E}[u(\sigma_3)] < \mathbb{E}[u(\sigma_4)]\), then under the measure defined as 
-	\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{u(\sigma_1)u(\sigma_3)}{u^2(\sigma_2)u^2(\sigma_4)} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\]
-	\(\mathbb{E}_Q[u(\sigma_1)]\geq\mathbb{E}_Q[u(\sigma_2)]\) and \(\mathbb{E}_Q[u(\sigma_3)]\geq\mathbb{E}_Q[u(\sigma_4)]\) where \(\alpha=\int_\Omega \frac{u(\sigma_1)u(\sigma_3)}{u^2(\sigma_2)u^2(\sigma_4)} dv(\omega) \).
+	\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{u(\sigma_1(\omega))u(\sigma_3(\omega))}{u^2(\sigma_2(\omega))u^2(\sigma_4(\omega))} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\]
+	\(\mathbb{E}_Q[u(\sigma_1)]\geq\mathbb{E}_Q[u(\sigma_2)]\) and \(\mathbb{E}_Q[u(\sigma_3)]\geq\mathbb{E}_Q[u(\sigma_4)]\) where 
+	\\
+	\(\alpha=\int_\Omega \frac{u(\sigma_1(\omega))u(\sigma_3(\omega))}{u^2(\sigma_2(\omega))u^2(\sigma_4(\omega))} dv(\omega) \).
 \end{corollary}
 
 \begin{proof}
@@ -170,13 +172,13 @@ Let there be \(m\) gambles represented by the matrix
 Permissible gambles implies that the rank of \(\Sigma\) is at most \(n\); that is, if there are more gambles than states in the world then either there are equivalent gambles or there are gambles that are strictly dominated by other gambles and are not relevant for this exercise.  This is a similar argument to the no-arbitrage condition in financial markets.  
 \\
 \\
-Parsimony suggests identifying a measure \(v\) so that \(\mathbb{Q}\) and \(\mathbb{P}\) are ``close'' to each other.  This motivates a constrained least squares problem:
+Parsimony suggests identifying a measure \(q\) so that \(\mathbb{Q}\) and \(\mathbb{P}\) are ``close'' to each other.  This motivates a constrained least squares problem:
 
 \begin{equation}
 \begin{aligned}
-\min_v \quad \norm{v-p} \\
-\textrm{s.t.}\quad u(\Sigma) v = z\\
-v \geq 0
+\min_v \quad \norm{q-p} \\
+\textrm{s.t.}\quad u(\Sigma) q = z\\
+q \geq 0
 \end{aligned}
 \end{equation}
 
@@ -210,7 +212,7 @@ Since these values are positive, the function \(u\) can be set to the ordinal ut
 	\end{tabular}
 \end{center}
 
-With a quadratic programming solver, a possible \(v\) is chosen as \(v(\omega)=[0.208, 0.735, 0.057]\).
+With a quadratic programming solver, a possible \(q\) is chosen as \(q(\omega)=[0.208, 0.735, 0.057]\).
 
 Under this measure, the expected utility for each outcome is 
 
@@ -259,10 +261,10 @@ Using the same utility function as in the first example,
 \end{bmatrix}\]
 
 
-Using corollary \ref{corr1}, a possible \(v\) is chosen as 
+A possible \(q\) is chosen as 
 \begin{equation*}
 \begin{aligned}
-v(\omega)=[0.19306, 0.64141, 0.11376, 0.00011, \\ 
+q(\omega)=[0.19306, 0.64141, 0.11376, 0.00011, \\ 
 0.00011, 0.00011, 0.05089, 0.00011, \\
 0.00011, 0.00011, 0.00011, 0.00011]
 \end{aligned}
