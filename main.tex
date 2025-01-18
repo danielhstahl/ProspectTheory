@@ -7,18 +7,19 @@
 \usepackage{graphicx}
 \usepackage{cite}
 \usepackage{float}
+\usepackage{blindtext}
 \setlength{\parindent}{0cm}
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
 \DeclareMathOperator{\diag}{diag}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\begin{document}
-	
-	
+
 \title{Existence of Expectation Representation of Preferences under Uncertainty}
 \date{}
 \author{Daniel H. Stahl}
 
+\begin{document}
+\maketitle
 \section{Introduction}
 
 Expected Utility Theory (EUT) is the dominant economic paradigm for modeling preferences under uncertainty. Classic EUT is justified by the von Nuemann-Morgenstern (1947) theorem, which provides four axioms under which an expected utility representation exists to express preferences under uncertainty.  In 1953, Allais (1953) challenged this theorem through a thought experiment (the ``Allais Paradox'') where most individuals would prefer gambles that violated EUT.  Subsequent empirical work (for example, List (2005)) provides additional evidence that classic EUT is not sufficiently rich to capture human behavior under uncertainty. Prospect Theory, introduced by Kahneman and Tversky (1979) has offered an alternative to Expected Utility Theory (EUT) and addressed these empirical discrepancies in classic EUT. Kahneman and Tversky particularly challenged the ``independence'' or ``substitution'' axiom of the von Nuemann-Morgenstern proof.  Prospect Theory posits that individuals evaluate outcomes relative to a reference point and weigh probabilities non-linearly. The outcomes are represented by a (not-everywhere-differentiable) ``value'' function instead of a utility function, and the output of the value function in each state is multiplied by a function of the probability of that state occurring, successfully explaining anomalies such as the Allais Paradox.  
@@ -284,7 +285,7 @@ This resolves the paradox.
 \section{Conclusion}
 
 This paper establishes that preferences can be represented by expectations even without relying on the independence axiom of von Neumann and Morgenstern. A measure exists such that preferences violating the independence axiom can still conform to an expectation representation. The proof is exemplified through preferences consistent with Allais' paradox, demonstrating that economic insights from EUT remain robust despite challenges posed by Kahneman and Tversky. This result suggests that the foundational principles of EUT can still apply to decision-making scenarios that deviate from classical assumptions.
-\newpage
+
 \subsection*{Bibliography}
 \begin{enumerate}
     \item Allais, M. (1953). Le comportement de l'homme rationnel devant le risque: critique des postulats et axiomes de l'école américaine. \textit{Econometrica}, 21(4), 503-546.
