@@ -22,20 +22,20 @@
 \maketitle
 \section{Introduction}
 
-Expected Utility Theory (EUT) is the dominant economic paradigm for modeling preferences under uncertainty. Classic EUT is justified by the von Nuemann-Morgenstern (1947) theorem, which provides four axioms under which an expected utility representation exists to express preferences under uncertainty.  In 1953, Allais (1953) challenged this theorem through a thought experiment (the ``Allais Paradox'') where most individuals would prefer gambles that violated EUT.  Subsequent empirical work (for example, List (2005)) provides additional evidence that classic EUT is not sufficiently rich to capture human behavior under uncertainty. Prospect Theory, introduced by Kahneman and Tversky (1979) has offered an alternative to Expected Utility Theory (EUT) and addressed these empirical discrepancies in classic EUT. Kahneman and Tversky particularly challenged the ``independence'' or ``substitution'' axiom of the von Nuemann-Morgenstern proof.  Prospect Theory posits that individuals evaluate outcomes relative to a reference point and weigh probabilities non-linearly. The outcomes are represented by a (not-everywhere-differentiable) ``value'' function instead of a utility function, and the output of the value function in each state is multiplied by a function of the probability of that state occurring, successfully explaining anomalies such as the Allais Paradox.  
+Expected Utility Theory (EUT) is the dominant economic paradigm for modeling preferences under uncertainty. Classic EUT is justified by the von Nuemann-Morgenstern (1947) theorem, which provides four axioms under which an expected utility representation exists to express preferences under uncertainty.  In 1953, Allais (1953) challenged this theorem through a thought experiment (the ``Allais Paradox'') where most individuals would prefer gambles that violated EUT.  Subsequent empirical work (for example, List (2005)) provides additional evidence that classic EUT is not sufficiently rich to capture human behavior under uncertainty. Prospect Theory, introduced by Kahneman and Tversky (1979) has offered an alternative to Expected Utility Theory (EUT) and addressed these empirical discrepancies in classic EUT. Kahneman and Tversky particularly challenged the ``independence'' or ``substitution'' axiom of the von Nuemann-Morgenstern proof.  Prospect Theory posits that individuals evaluate outcomes relative to a reference point and weigh probabilities non-linearly. The outcomes are represented by a (not-everywhere-differentiable) ``value'' function instead of a utility function, and the output of the value function in each state is multiplied by a function of the probability of that state occurring, successfully explaining anomalies such as the Allais Paradox.
 \\
 \\
 Kahneman and Tversky's paper sparked additional research and interest in modeling behavior under uncertainty without relying on EUT.  Quiggin (1982) introduced rank-dependent weightings on the probabilities; representing utility as the sum of the utility in each potential outcome weighted by a function of the (cumulative) probability of each outcome. Tversky and Kahneman (1992) incorporated Quiggin's approach, extending Prospect Theory into Cumulative Prospect Theory (CPT).  Research by Wakker and Tversky (1993) further refined the theoretical underpinnings of CPT and contrasted it with EUT.
 \\
 \\
-While this literature builds a mathematically rigorous alternative to EUT, financial and economic literature continues to be dominated by EUT.  Notable exceptions include Barberis and Huang (2008) for financial asset pricing, Schmidt and Zank (2008) for analyzing risk-aversion with Prospect Theory, and Gonzalez and Wu (1999) and Prelec (1998) for statistically estimating the cumulative weighting function.  
+While this literature builds a mathematically rigorous alternative to EUT, financial and economic literature continues to be dominated by EUT.  Notable exceptions include Barberis and Huang (2008) for financial asset pricing, Schmidt and Zank (2008) for analyzing risk-aversion with Prospect Theory, and Gonzalez and Wu (1999) and Prelec (1998) for statistically estimating the cumulative weighting function.
 \\
 \\
-In this paper, I prove the existence of an expectation representation of preferences without requiring the independence assumption of von Nuemann and Morgenstern.  I show that a measure exists such that preferences which violate the independence axiom can still be represented by an expectation.  This approach has two major benefits over the CPT.  First, the approach is a parsimonious extension of EUT: while a new measure does ``re-weight'' probabilities as in CPT, it does not require rank-ordering preferences, accumulating probabilities, or using a non-differentiable value function.  Second, by allowing an expectation representation, the vast literature built on EUT remains sound despite Kahneman and Tversky's objections to the independence axiom. I give a practical example by showing that preferences consistent with Allais' paradox can be represented by expectations.  
+In this paper, I prove the existence of an expectation representation of preferences without requiring the independence assumption of von Nuemann and Morgenstern.  I show that a measure exists such that preferences which violate the independence axiom can still be represented by an expectation.  This approach has two major benefits over the CPT.  First, the approach is a parsimonious extension of EUT: while a new measure does ``re-weight'' probabilities as in CPT, it does not require rank-ordering preferences, accumulating probabilities, or using a non-differentiable value function.  Second, by allowing an expectation representation, the vast literature built on EUT remains sound despite Kahneman and Tversky's objections to the independence axiom. I give a practical example by showing that preferences consistent with Allais' paradox can be represented by expectations.
 
 \section{The von Nuemann-Morgenstern Axioms}
 
-Let \(X\) represent the consumption set available to economic agents.  A bundle \(x \in X\) is a set of consumption options within \(X\).  A gamble \(\sigma\) is a random variable that chooses (potentially) different consumption bundles within \(X\) for various states of the world.  In the language of probability theory, \(\sigma: \Omega \to X\).  I allow gambles to also exist in the consumption set, allowing me to state that \(\sigma \in X\).  Unless otherwise stated, I denote ``deterministic'' consumption bundles as \(x_i \in X\) while I denote gambles as \(\sigma_i \in X\). 
+Let \(X\) represent the consumption set available to economic agents.  A bundle \(x \in X\) is a set of consumption options within \(X\).  A gamble \(\sigma\) is a random variable that chooses (potentially) different consumption bundles within \(X\) for various states of the world.  In the language of probability theory, \(\sigma: \Omega \to X\).  I allow gambles to also exist in the consumption set, allowing me to state that \(\sigma \in X\).  Unless otherwise stated, I denote ``deterministic'' consumption bundles as \(x_i \in X\) while I denote gambles as \(\sigma_i \in X\).
 \\
 \\
 The von Nuemann-Morgenstern theorem states that given a set of axioms, there exists a function \(u: X \to \mathbf{R}\) such that for all \(\sigma_1, \sigma_2 \in X\), \(\mathbb{E}\left[u(\sigma_1)\right] \geq \mathbb{E}\left[u(\sigma_2)\right]\) if and only if \(\sigma_1 \succeq  \sigma_2\).  These axioms are:
@@ -47,15 +47,15 @@ The von Nuemann-Morgenstern theorem states that given a set of axioms, there exi
 	\item \textbf{Independence}.  \(\forall x_1, \, x_2,\,x_3 \in X\) and \(\alpha \in [0,\,1]\), \(x_1 \succeq  x_2 \Leftrightarrow \alpha x_1+(1-\alpha)x_3 \succeq  \alpha x_2 +(1-\alpha)x_3\)
 \end{enumerate}
 
-Only the first two axioms are required for rationality.  The third is required to ensure the existence of a utility function (agents may be rational even if no utility function exists).  The last axiom, per von Nuemann-Morgenstern's proof, is required to ensure that preferences in an uncertain world can be represented by taking expectations. 
+Only the first two axioms are required for rationality.  The third is required to ensure the existence of a utility function (agents may be rational even if no utility function exists).  The last axiom, per von Nuemann-Morgenstern's proof, is required to ensure that preferences in an uncertain world can be represented by taking expectations.
 \\
 \\
-This theorem is powerful: it provides theoretical justification for using the mathematical language of expected utility as a toolkit for explaining human preferences and behavior.  However, the proof relies heavily on all four axioms.  If one of the axioms is shown to be false, the proof fails.  
+This theorem is powerful: it provides theoretical justification for using the mathematical language of expected utility as a toolkit for explaining human preferences and behavior.  However, the proof relies heavily on all four axioms.  If one of the axioms is shown to be false, the proof fails.
 \\
 \\
-The proof is constructive, demonstrating how a utility function can be created.  The construction relies on all four axioms.  However, utility functions may still exist if the third and fourth axioms are relaxed.  They simply cannot be constructed in the same way as in the theorem.  In other words, if the independence axiom is not valid, expected utility under the real-world measure \emph{may} still represent preferences, but it is not \emph{guaranteed} to do so.  
+The proof is constructive, demonstrating how a utility function can be created.  The construction relies on all four axioms.  However, utility functions may still exist if the third and fourth axioms are relaxed.  They simply cannot be constructed in the same way as in the theorem.  In other words, if the independence axiom is not valid, expected utility under the real-world measure \emph{may} still represent preferences, but it is not \emph{guaranteed} to do so.
 
-\section{The Allais Paradox} 
+\section{The Allais Paradox}
 
 In 1953, Allais proposed the following two sets of choices of gambles:
 
@@ -99,7 +99,7 @@ OR
 \end{array} \right.
 \end{equation*}
 
-If the von Nuemann-Morgenstern theorem holds (using both the existence of a utility function and the independence axiom), the second choice can be decomposed as 
+If the von Nuemann-Morgenstern theorem holds (using both the existence of a utility function and the independence axiom), the second choice can be decomposed as
 \begin{align*}
 0.89u(0)+0.11u(1)\, &|\, 0.9u(0)+0.1u(5) \\
 \Leftrightarrow u(1)-0.89u(1) \, &|\, 0.01u(0)+0.1u(5) \\
@@ -112,75 +112,34 @@ This final statement is simply the utility of the first choice.  Hence if an age
 \\
 In reality, many people would prefer the first option for choice one and the second option for choice two.  Even the remote possibility of missing out on 1 million dollars is too big a gamble. For the remainder of this paper the independence axiom is dropped.  I show that even without this axiom an expectation representation exists for preferences under uncertainty.
 
- 
+
 \section{Existence of Utility Function and Probability Measure}
 
 \begin{theorem} \label{theorem1}
-Assume the first three von Nuemann-Morgenstern axioms, which implies the existence of an (ordinal) utility function \(g\) representing preferences such that \(g(x_1)\geq g(x_2) \Leftrightarrow x_1 \succeq x_2 \).  Assume a probability space which contains the outcomes of all relevant gambles. Then there exists a function \(u: X \to \mathbb{R}\) and a probability measure \(\mathbb{Q}\) equivalent to the ``physical'' measure \(\mathbb{P}\) such that \(\mathbb{E}_Q\left[u(\sigma_1)\right] \geq \mathbb{E}_Q\left[u(\sigma_2)\right]\) if and only if \(\sigma_1 \succeq \sigma_2\).  
-\end{theorem} 
+Assume the first three von Nuemann-Morgenstern axioms, which implies the existence of an (ordinal) utility function \(g\) representing preferences such that \(g(x_1)\geq g(x_2) \Leftrightarrow x_1 \succeq x_2 \).  Assume a set of independent gambles.  Then there exists a function \(u: X \to \mathbb{R}\) and a probability measure \(\mathbb{Q}\) equivalent to the ``physical'' measure \(\mathbb{P}\) such that \(\mathbb{E}_Q\left[u(\sigma_1)\right] \geq \mathbb{E}_Q\left[u(\sigma_2)\right]\) if and only if \(\sigma_1 \succeq \sigma_2\).
+\end{theorem}
 
 \begin{proof}
-Debreu's Representation Theorem axioms 1, 2, and 3 are sufficient and necessary for the existence of the ordinal utility function \(g\).  I can denote the real-world expectation of the two gambles as \(\mathbb{E}[g(\sigma_1)]\) and \(\mathbb{E}[g(\sigma_2)]\). 
+The proof that a measure exists is nearly trivial and is by construction.  Debreu's Representation Theorem axioms 1, 2, and 3 are sufficient and necessary for the existence of the ordinal utility function \(g\).  By the Transitivity axiom, the utility of a gamble must be bounded by the utility in the best and worst outcomes.
+Represent each gamble by a vector \(v_i\) of outcomes from gamble \(\sigma_i\).  Since the actual utility of gamble \(\sigma_i\) (denoted \(g(x^*_i)\) where \(x^*_i\) is the ``equivalent'' deterministic bundle) lies in the relative interior of \(v_i\), there exists at least one (and typically many) strictly positive vectors \(q_i\) such that \(g(x_i)^T q_i = g(x^*_i)\).
+The full measure \(\mathbb{Q}\) is then recovered by taking the Cartesian product of each \(q_i\) and multiplying each row.  The resulting vector has length \(\prod_i \norm{v_i} \).  In many cases the utility function \(u\) can simply be chosen to be \(g\).  If for a given application utility needs to be positive, \(u\) can be defined as \(u = a+bg\) where \(a\) and \(b\) are chosen such that \(u\) is positive.
 
-\subsubsection*{Case 1}
-
-If \(\mathbb{E}[g(\sigma_1)]\geq\mathbb{E}[g(\sigma_2)]\) and \(\sigma_1 \succeq \sigma_2\), then \(\mathbb{Q}\) can be chosen to be \(\mathbb{P}\) and \(u(\cdot)\) can be chosen to be \(g(\cdot)\); and the work is done. Note that this will be the case under any measure if the outcome of \(\sigma_2\) is preferred to the outcome of \(\sigma_1\) in all states.
-
-\subsubsection*{Case 2}
-
-The interesting case is when \(\mathbb{E}[g(\sigma_1)]<\mathbb{E}[g(\sigma_2)]\) while \(\sigma_1 \succeq \sigma_2\).  Note that since \(g\) is ordinal I can always choose \(u=a+bg\) such that \(u\) is positive.  This lets me define a new probability measure:
-
-\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{u(\sigma_1(\omega))}{u^2(\sigma_2(\omega))} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\] 
-Where \(\alpha=\int_\Omega \frac{u(\sigma_1(\omega))}{u^2(\sigma_2(\omega))} dv(\omega) \), \(\mu\) is the real-world probability measure, and \(v\) is a ``free'' measure that agrees with the real-world measure on which events have measure zero.  Armed with this new measure, we can compute the new expectations:
-
-\[\mathbb{E}_Q[u(\sigma_1)]=\frac{1}{\alpha} \int_\Omega \frac{u^2(\sigma_1(\omega))}{u^2(\sigma_2(\omega))} dv(\omega)\]
-\[\mathbb{E}_Q[u(\sigma_2)]=\frac{1}{\alpha} \int_\Omega \frac{u(\sigma_1(\omega))}{u(\sigma_2(\omega))} dv(\omega)\]
-
-Since \(\sigma_1\) is preferred to \(\sigma_2\) in at least some states of the world (or else we would be in Case 1), \(v\) can be chosen so that \(\int_\Omega \frac{u(\sigma_1(\omega))}{u(\sigma_2(\omega))} dv(\omega)\geq 1\).  For example, \(dv\) could simply be \(\mathbb{I}_{u(\sigma_1)>u(\sigma_2)}\).  Then by Jenson's inequality, 
-\[\mathbb{E}_Q[u(\sigma_1)] \geq   \mathbb{E}_Q[u(\sigma_2)]^2 \geq  \mathbb{E}_Q[u(\sigma_2)] \implies \mathbb{E}_Q[u(\sigma_1)] \geq \mathbb{E}_Q[u(\sigma_2)] \]
-
-\end{proof}
-
-\begin{corollary}\label{corr1}
-	If gambles \(\sigma_3\) and \(\sigma_4\) are independent of gambles \(\sigma_1\) and \(\sigma_2\) under measure \(v\), \(\mathbb{E}[u(\sigma_1)] < \mathbb{E}[u(\sigma_2)]\), and \(\mathbb{E}[u(\sigma_3)] < \mathbb{E}[u(\sigma_4)]\), then under the measure defined as 
-	\[\mathbb{Q}(A)=\frac{1}{\alpha}\int_A \frac{u(\sigma_1(\omega))u(\sigma_3(\omega))}{u^2(\sigma_2(\omega))u^2(\sigma_4(\omega))} \frac{dv(\omega) }{ d\mu(\omega)} d\mu(\omega)\]
-	\(\mathbb{E}_Q[u(\sigma_1)]\geq\mathbb{E}_Q[u(\sigma_2)]\) and \(\mathbb{E}_Q[u(\sigma_3)]\geq\mathbb{E}_Q[u(\sigma_4)]\) where 
-	\\
-	\(\alpha=\int_\Omega \frac{u(\sigma_1(\omega))u(\sigma_3(\omega))}{u^2(\sigma_2(\omega))u^2(\sigma_4(\omega))} dv(\omega) \).
-\end{corollary}
-
-\begin{proof}
-This follows from Theorem \ref{theorem1} and by the fact that \(\mathbb{E}[XY]=\mathbb{E}[X]\mathbb{E}[Y]\) if \(X\) and \(Y\) are independent.  
 \end{proof}
 
 \section{Selecting a Probability Measure}
 
-The previous section shows that a measure could be constructed.  This section proposes a method to construct the measure in a discrete setting.
-
-Let there be \(n\) states of the world, with probability of each state given by the vector 
-\[p = [p_1, p_2, \dotsc, p_n]\]  
-Let there be \(m\) gambles represented by the matrix 
-\[\Sigma = \begin{bmatrix}
-    \sigma_{11}       & \sigma_{12} & \dots & \sigma_{1n} \\
-    \sigma_{21}       & \sigma_{22}  & \dots & \sigma_{2n} \\
-    \hdotsfor{4} \\
-    \sigma_{m1}       & \sigma_{m2} & \dots & \sigma_{mn}
-\end{bmatrix}\]
-
-Permissible gambles implies that the rank of \(\Sigma\) is at most \(n\); that is, if there are more gambles than states in the world then either there are equivalent gambles or there are gambles that are strictly dominated by other gambles and are not relevant for this exercise.  This is a similar argument to the no-arbitrage condition in financial markets.  
-\\
-\\
-Parsimony suggests identifying a measure \(q\) so that \(\mathbb{Q}\) and \(\mathbb{P}\) are ``close'' to each other.  This motivates a constrained least squares problem:
+The previous section shows that a measure could be constructed.  While in principal any \(q_i\) that satisfies \(u(v_i)^T q_i = u(x^*_i)\) can be chosen, parsimony suggests finding a vector that is ``similar'' to the real-world probabilities.
+This motivates a series of constrained least squares problem (one for each gamble \(\sigma_i\)):
 
 \begin{equation}
 \begin{aligned}
-\min_v \quad \norm{q-p} \\
-\textrm{s.t.}\quad u(\Sigma) q = z\\
-q \geq 0
+\min_q \quad \norm{q_i-p_i} \\
+\textrm{s.t.}\quad u(v_i)^T q_i = u(x^*_i)\\
+\quad \sum_j q_{i,j} = 1
 \end{aligned}
 \end{equation}
 
-Where \(z\) is the ``actual'' utility and whose ordering of the outcomes under \(\mathbb{Q}\) aligns with the ordering of preferences.  This problem can be solved using Quadratic Programming, and many programming languages have libraries capable of this optimization. For example, in the programming language Python, the ``SciPy'' optimization library can perform this type of constrained optimization.
+Where \(u(x^*_i)\) is the ``actual'' utility of the gamble and whose ordering of the outcomes under \(\mathbb{Q}\) across gambles aligns with the ordering of preferences. This problem is easily solvable via Lagrange multipliers.
 
 \subsection{Examples}
 
@@ -200,9 +159,9 @@ Assuming a starting wealth of \(\$100,000\) and a log utility function, the (ord
 	13.911 & 15.445  \\
 \end{bmatrix}\]
 
-Since these values are positive, the function \(u\) can be set to the ordinal utility function \(g\).  The expected utility from these two outcomes under the real-world measure is 
+The function \(u\) can be set to the ordinal utility function \(g\).  The expected utility from these two outcomes under the real-world measure is
 
-\begin{center} 
+\begin{center}
 	\begin{tabular}{c c}
 		& Expected Utility under \(\mathbb{P}\) \\
 		Choice 1 Option 1 & 13.911 \\
@@ -210,77 +169,62 @@ Since these values are positive, the function \(u\) can be set to the ordinal ut
 	\end{tabular}
 \end{center}
 
-With a quadratic programming solver, a possible \(q\) is chosen as \(q(\omega)=[0.208, 0.735, 0.057]\).
+For the sake of the example, plausible actual utility values could be
 
-Under this measure, the expected utility for each outcome is 
+\begin{center}
+	\begin{tabular}{c c}
+		& Actual Utility \\
+		Choice 1 Option 1 & 13.911 \\
+		Choice 1 Option 2 & 13.900 \\
+	\end{tabular}
+\end{center}
 
-\begin{center} 
+Solving the Lagrange, a \(q\) is chosen as \(q(\omega)=[0.0477, 0.885, 0.067]\).
+
+Under this measure, the expected utility for each outcome corresponds to the actual utility:
+
+\begin{center}
 	\begin{tabular}{c c}
 		& Expected Utility under \(\mathbb{Q}\) \\
 		Choice 1 Option 1 & 13.911 \\
-		Choice 1 Option 2 & 13.500 \\
+		Choice 1 Option 2 & 13.900 \\
 	\end{tabular}
 \end{center}
 
 \subsubsection{Allias Paradox all choices}
 
-The outcomes of all four choices can be represented as the following matrix (in millions):
+Extending the previous example to all choices generates the following \(q\) vectors:
 
-\[X^T=\begin{bmatrix}
-1 & 0 & 0 & 0 \\
-1 & 1 & 0 & 0 \\
-1 & 5 & 0 & 0 \\
-1 & 0 & 1 & 0 \\
-1 & 1 & 1 & 0 \\
-1 & 5 & 1 & 0 \\
-1 & 0 & 0 & 5 \\
-1 & 1 & 0 & 5 \\
-1 & 5 & 0 & 5 \\
-1 & 0 & 1 & 5 \\
-1 & 1 & 1 & 5 \\
-1 & 5 & 1 & 5
-\end{bmatrix}\]
+\[q_1=[1.000]\]
 
-Using the same utility function as in the first example,
+\[q_2=[0.0477, 0.885, 0.067]\]
 
-\[M^T=\begin{bmatrix}
-	13.911 & 11.513 & 11.513 & 11.513  \\
-	13.911 & 13.911  & 11.513 & 11.513 \\
-	13.911 & 15.445 & 11.513 & 11.513 \\
-	13.911 & 11.513 & 13.911 & 11.513 \\
-	13.911 & 13.911  & 13.911 & 11.513 \\
-	13.911 & 15.445  & 13.911 & 11.513 \\
-	13.911 & 11.513 & 11.513  & 15.445 \\
-	13.911 & 13.911  & 11.513  & 15.445 \\
-	13.911 & 15.445  & 11.513  & 15.445 \\
-	13.911 & 11.513  & 13.911  & 15.445 \\
-	13.911 & 13.911  & 13.911  & 15.445 \\
-	13.911 & 15.445  & 13.911  & 15.445 \\
-\end{bmatrix}\]
+\[q_3=[0.980, 0.020]\]
 
+\[q_4=[0.986, 0.014]\]
 
-A possible \(q\) is chosen as 
+Taking the Cartesian product of the four vectors yields the full measure \(q\):
 \begin{equation*}
 \begin{aligned}
-q(\omega)=[0.19306, 0.64141, 0.11376, 0.00011, \\ 
-0.00011, 0.00011, 0.05089, 0.00011, \\
-0.00011, 0.00011, 0.00011, 0.00011]
+q(\omega)=[0.046, 0.001, 0.001, 0.000, \\
+0.855, 0.012, 0.018, 0.000, \\
+0.065, 0.001, 0.001, 0.000]
 \end{aligned}
 \end{equation*}
 
-Under this measure, the expected utility for each outcome is 
+Under this measure, the expected utility for each outcome is
 
-\begin{center} 
+\begin{center}
 	\begin{tabular}{c c}
 		& Expected Utility under \(\mathbb{Q}\) \\
 		Choice 1 Option 1 & 13.911 \\
-		Choice 1 Option 2 & 13.501 \\
-		Choice 2 Option 1 & 11.515 \\
-		Choice 2 Option 2 & 11.715 \\
+		Choice 1 Option 2 & 13.900 \\
+		Choice 2 Option 1 & 11.562 \\
+		Choice 2 Option 2 & 11.566 \\
 	\end{tabular}
 \end{center}
 
-This resolves the paradox.  
+This resolves the paradox.
 
 \section{Conclusion}
 
@@ -299,7 +243,7 @@ This paper establishes that preferences can be represented by expectations even 
     \item Schmidt, U., and Zank, H. (2008). Risk aversion in cumulative prospect theory. \textit{Management Science}, 54(1), 208-216.
     \item Tversky, A., and Kahneman, D. (1992). Advances in prospect theory: Cumulative representation of uncertainty. \textit{Journal of Risk and Uncertainty}, 5(4), 297-323.
     \item Wakker, P., and Tversky, A. (1993). An axiomatization of cumulative prospect theory. \textit{Journal of Risk and Uncertainty}, 7(2), 147-175.
-    
+
 \end{enumerate}
-	
+
 \end{document}

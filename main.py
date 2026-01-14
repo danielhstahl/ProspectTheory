@@ -1,151 +1,87 @@
-import numpy as np
-from scipy.optimize import minimize
-from typing import Tuple
-
-np.set_printoptions(suppress=True)
+from typing import Callable
+import itertools
+import math
 
 
-def create_basic_allais() -> Tuple[np.array, np.array, np.array]:
-    M = np.array([[13.911, 13.911, 13.911], [11.513, 13.911, 15.445]])
-    p = np.array([0.01, 0.89, 0.1])
-    z = np.array([13.911, 13.5])  # slight preference for the sure thing
-    return M, p, z
+def square(x: float) -> float:
+    return x * x
 
 
-def create_complex_allais() -> Tuple[np.array, np.array, np.array]:
-    M = np.array(
-        [
-            [
-                13.911,
-                13.911,
-                13.911,
-                13.911,
-                13.911,
-                13.911,
-                13.911,
-                13.911,
-                13.911,
-                13.911,
-                13.911,
-                13.911,
-            ],
-            [
-                11.513,
-                13.911,
-                15.445,
-                11.513,
-                13.911,
-                15.445,
-                11.513,
-                13.911,
-                15.445,
-                11.513,
-                13.911,
-                15.445,
-            ],
-            [
-                11.513,
-                11.513,
-                11.513,
-                13.911,
-                13.911,
-                13.911,
-                11.513,
-                11.513,
-                11.513,
-                13.911,
-                13.911,
-                13.911,
-            ],
-            [
-                11.513,
-                11.513,
-                11.513,
-                11.513,
-                11.513,
-                11.513,
-                15.445,
-                15.445,
-                15.445,
-                15.445,
-                15.445,
-                15.445,
-            ],
-        ]
+def get_best_quadratic_probabilities(
+    gamble_outcomes: list[float],
+    gamble_probabilities: list[float],
+    equivalent_utility: float,
+    utility: Callable[[float], float],
+) -> list[float]:
+    n = len(gamble_outcomes)
+    if n == 1:
+        return [1.0]
+    real_world_expected_value = sum(
+        utility(outcome) * probability
+        for outcome, probability in zip(gamble_outcomes, gamble_probabilities)
     )
-    p = np.array(
-        [
-            0.00801,
-            0.71289,
-            0.08010,
-            0.00099,
-            0.08811,
-            0.00990,
-            0.00089,
-            0.07921,
-            0.00890,
-            0.00011,
-            0.00979,
-            0.00110,
-        ]
+    total_gamble_utility = sum(utility(outcome) for outcome in gamble_outcomes)
+    total_gamble_utility_sq = sum(
+        square(utility(outcome)) for outcome in gamble_outcomes
     )
-    z = np.array([13.911, 13.5, 11.5, 11.7])
-    return M, p, z
 
-
-def _loss(v, p):
-    return sum(np.square(v - p))
-
-
-def jac(v):
-    return 2 * v  # gradient of square of difference between v and p
-
-
-def get_q(M, p, z):
-
-    x0 = np.random.uniform(0.0, 1.0, len(p))
-    cons = [
-        {
-            "type": "ineq",
-            "fun": lambda x: x
-            - np.ones(len(x))
-            * min(p),  # don't allow "x" smaller than smallest real world p
-            "jac": lambda x: np.diag(
-                np.ones(len(x))
-            ),  # jacobian of "fun" (matrix of ones in diagonal)
-        },
-        {"type": "eq", "fun": lambda x: np.matmul(M, x) - z, "jac": lambda x: M},
+    lambda1 = (
+        2
+        * (equivalent_utility - real_world_expected_value)
+        / (square(total_gamble_utility) / n - total_gamble_utility_sq)
+    )
+    lambda2 = -lambda1 * total_gamble_utility / n
+    return [
+        probability - utility(outcome) * lambda1 * 0.5 - lambda2 * 0.5
+        for outcome, probability in zip(gamble_outcomes, gamble_probabilities)
     ]
-    # https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html
-    result = minimize(
-        lambda x: _loss(x, p),
-        x0,
-        jac=jac,
-        constraints=cons,
-        method="SLSQP",
-        options={
-            "disp": False,
-            "ftol": 1,
-        },  # huge tolerance to allow more starting positions to "converge" as we don't need to be precise
-    )
-    q = result.x / sum(result.x)
-    utility = np.matmul(M, q)
-    if result.success:
-        return q, utility
-    else:
-        print(result)
-        print("q", q)
-        print("utility", utility)
-        raise Exception("Failed to converge")
+
+
+def utility(init_wealth: float, result: float) -> float:
+    return math.log(init_wealth + result)
+
+
+def get_probabilities(probabilities: list[list[float]]) -> list[float]:
+    return [math.prod(v) for v in itertools.product(*probabilities)]
 
 
 if __name__ == "__main__":
-    M, p, z = create_basic_allais()
-    q_basic, result_basic = get_q(M, p, z)
-    print(q_basic)
-    print(result_basic)
+    gambles: list[list[float]] = [
+        [1000000.0],
+        [0.0, 1000000.0, 5000000.0],
+        [0.0, 1000000.0],
+        [0.0, 5000000.0],
+    ]
+    probabilities = [[1], [0.01, 0.89, 0.1], [0.89, 0.11], [0.9, 0.1]]
+    init_wealth = 100000
+    equivalent_utilities = [
+        utility(init_wealth, 1000000),
+        utility(init_wealth, 988000),
+        utility(init_wealth, 5000),
+        utility(init_wealth, 5500),
+    ]
 
-    M, p, z = create_complex_allais()
-    q_complex, result_complex = get_q(M, p, z)
-    print(q_complex)
-    print(result_complex)
+    ## real work probability
+    p = get_probabilities(probabilities)
+    print("p")
+    print(p)
+
+    rn_prob = [
+        get_best_quadratic_probabilities(
+            gamble, probs, eq_utility, lambda x: utility(init_wealth, x)
+        )
+        for gamble, probs, eq_utility in zip(
+            gambles, probabilities, equivalent_utilities
+        )
+    ]
+    for index, (prob, gamble) in enumerate(zip(rn_prob, gambles)):
+        print(f"sum of q_{index + 1} (should be one)", sum(prob))  # should all equal 1
+        print(
+            f"expected utility of gamble {index + 1} under q",
+            sum(p * utility(init_wealth, o) for p, o in zip(prob, gamble)),
+        )  # expected utility
+
+    q = get_probabilities(rn_prob)
+
+    print("q")
+    print(q)
