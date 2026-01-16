@@ -129,17 +129,17 @@ The full measure \(\mathbb{Q}\) is then recovered by taking the Cartesian produc
 \section{Selecting a Probability Measure}
 
 The previous section shows that a measure could be constructed.  While in principal any \(q_i\) that satisfies \(u(v_i)^T q_i = u(x^*_i)\) can be chosen, parsimony suggests finding a vector that is ``similar'' to the real-world probabilities.
-This motivates a series of constrained least squares problem (one for each gamble \(\sigma_i\)):
+This motivates a series of constrained minimization problems (one for each gamble \(\sigma_i\)).  A natural choice for objective function is the Kullback-Leibler (KL) divergence:
 
 \begin{equation}
 \begin{aligned}
-\min_q \quad \norm{q_i-p_i} \\
-\textrm{s.t.}\quad u(v_i)^T q_i = u(x^*_i)\\
+\min_q \quad \sum_j q_{i, j}\mathrm{ln}\left( p_{i, j}/q_{i, j} \right) \\
+\textrm{s.t.}\quad \sum_j u(v_{i, j}) q_{i, j} = u(x^*_i)\\
 \quad \sum_j q_{i,j} = 1
 \end{aligned}
 \end{equation}
 
-Where \(u(x^*_i)\) is the ``actual'' utility of the gamble and whose ordering of the outcomes under \(\mathbb{Q}\) across gambles aligns with the ordering of preferences. This problem is easily solvable via Lagrange multipliers.
+Where \(u(x^*_i)\) is the ``actual'' utility of the gamble \(\sigma_i\) and whose ordering of the outcomes under \(\mathbb{Q}\) across gambles aligns with the ordering of preferences. This problem is solvable via Lagrange multipliers, with final multiplier solvable via efficient numerical methods.
 
 \subsection{Examples}
 
@@ -179,7 +179,7 @@ For the sake of the example, plausible actual utility values could be
 	\end{tabular}
 \end{center}
 
-Solving the Lagrange, a \(q\) is chosen as \(q(\omega)=[0.0477, 0.885, 0.067]\).
+Solving the Lagrange, a \(q\) is chosen as \(q(\omega)=[0.0345, 0.918, 0.047]\).
 
 Under this measure, the expected utility for each outcome corresponds to the actual utility:
 
@@ -197,18 +197,18 @@ Extending the previous example to all choices generates the following \(q\) vect
 
 \[q_1=[1.000]\]
 
-\[q_2=[0.0477, 0.885, 0.067]\]
+\[q_2=[0.0345, 0.918, 0.047]\]
 
-\[q_3=[0.980, 0.020]\]
+\[q_3=[0.831, 0.169]\]
 
-\[q_4=[0.986, 0.014]\]
+\[q_4=[0.880, 0.120]\]
 
 Taking the Cartesian product of the four vectors yields the full measure \(q\):
 \begin{equation*}
 \begin{aligned}
-q(\omega)=[0.046, 0.001, 0.001, 0.000, \\
-0.855, 0.012, 0.018, 0.000, \\
-0.065, 0.001, 0.001, 0.000]
+q(\omega)=[0.025, 0.003, 0.005, 0.001, \\
+0.671, 0.091, 0.137, 0.019, \\
+0.035, 0.005, 0.007, 0.001]
 \end{aligned}
 \end{equation*}
 
@@ -219,8 +219,8 @@ Under this measure, the expected utility for each outcome is
 		& Expected Utility under \(\mathbb{Q}\) \\
 		Choice 1 Option 1 & 13.911 \\
 		Choice 1 Option 2 & 13.900 \\
-		Choice 2 Option 1 & 11.562 \\
-		Choice 2 Option 2 & 11.566 \\
+		Choice 2 Option 1 & 11.918 \\
+		Choice 2 Option 2 & 11.983 \\
 	\end{tabular}
 \end{center}
 
