@@ -1,6 +1,7 @@
 from typing import Callable
 import itertools
 import math
+from scipy.optimize import newton
 
 
 def square(x: float) -> float:
@@ -45,6 +46,59 @@ def get_probabilities(probabilities: list[list[float]]) -> list[float]:
     return [math.prod(v) for v in itertools.product(*probabilities)]
 
 
+def _get_q_numerator(
+    gamble_outcomes: list[float], gamble_probabilities: list[float], lmbda: float
+) -> list[float]:
+    return [
+        p * math.exp(-outcome * lmbda)
+        for outcome, p in zip(gamble_outcomes, gamble_probabilities)
+    ]
+
+
+def get_q(
+    gamble_outcomes: list[float], gamble_probabilities: list[float], lmbda: float
+) -> list[float]:
+    numerator = _get_q_numerator(gamble_outcomes, gamble_probabilities, lmbda)
+    denominator = sum(numerator)
+    return [num / denominator for num in numerator]
+
+
+# negative variance of distribution
+def get_q_gradient(
+    gamble_outcomes: list[float], gamble_probabilities: list[float], lmbda: float
+) -> float:
+    q = get_q(gamble_outcomes, gamble_probabilities, lmbda)
+    return square(sum(qj * outcome for qj, outcome in zip(q, gamble_outcomes))) - sum(
+        qj * outcome * outcome for qj, outcome in zip(q, gamble_outcomes)
+    )
+
+
+def get_q_expectation(
+    gamble_outcomes: list[float], gamble_probabilities: list[float], lmbda: float
+) -> float:
+    q = get_q(gamble_outcomes, gamble_probabilities, lmbda)
+    return sum(qj * outcome for qj, outcome in zip(q, gamble_outcomes))
+
+
+def get_best_dk_probabilities(
+    gamble_outcomes: list[float],
+    gamble_probabilities: list[float],
+    equivalent_utility: float,
+    utility: Callable[[float], float],
+) -> list[float]:
+    n = len(gamble_outcomes)
+    if n == 1:
+        return [1.0]
+    gamble_utilities = [utility(outcome) for outcome in gamble_outcomes]
+    lambda_opt = newton(
+        func=lambda x: get_q_expectation(gamble_utilities, gamble_probabilities, x)
+        - equivalent_utility,
+        fprime=lambda x: get_q_gradient(gamble_utilities, gamble_probabilities, x),
+        x0=0.1,
+    )
+    return get_q(gamble_utilities, gamble_probabilities, lambda_opt)
+
+
 if __name__ == "__main__":
     gambles: list[list[float]] = [
         [1000000.0],
@@ -57,8 +111,8 @@ if __name__ == "__main__":
     equivalent_utilities = [
         utility(init_wealth, 1000000),
         utility(init_wealth, 988000),
-        utility(init_wealth, 5000),
-        utility(init_wealth, 5500),
+        utility(init_wealth, 50000),
+        utility(init_wealth, 60000),
     ]
 
     ## real work probability
@@ -66,8 +120,19 @@ if __name__ == "__main__":
     print("p")
     print(p)
 
+    # rn_prob = [
+    #    get_best_quadratic_probabilities(
+    #        gamble, probs, eq_utility, lambda x: utility(init_wealth, x)
+    #    )
+    #    for gamble, probs, eq_utility in zip(
+    #        gambles, probabilities, equivalent_utilities
+    #    )
+    # ]
+    #
+    #
+
     rn_prob = [
-        get_best_quadratic_probabilities(
+        get_best_dk_probabilities(
             gamble, probs, eq_utility, lambda x: utility(init_wealth, x)
         )
         for gamble, probs, eq_utility in zip(
